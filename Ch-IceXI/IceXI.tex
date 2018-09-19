@@ -56,9 +56,9 @@ The ease of generation of an ice XI structure stems from the repetition of a uni
 All protons and lone pairs are ordered in a consistent manner that produce proper hydrogen bonds. 
 As such, lattice defects do not naturally arise in the computational structure without running a simulation with sufficient energy to perturb the system.
 
-With ice I$_{h}$ crystals, the proton-disordered form introduces entropy by way of ro- tational disorder. 
+With ice I$_{h}$ crystals, the proton-disordered form introduces entropy by way of rotational disorder. 
 As the protons and lone pairs are no longer consistently ordered, hydrogen bonds may no longer form properly at all interaction sites. 
-The interaction of proton with proton or lone pair with lone pair are not hydrogen bonds and are con- sidered defects in the lattice. 
+The interaction of proton with proton or lone pair with lone pair are not hydrogen bonds and are considered defects in the lattice. 
 An ice structure of randomly oriented molecules without consideration of hydrogen bonds will likely produce defects at many interaction sites across the lattice and weaken the integrity of the system, leading to stability problems while running simulations. 
 In generating the crystal, the cause of these defects must be considered and countered effectively.
 
@@ -76,9 +76,7 @@ Using a pseudo-random number generator, two of the four location potentials are 
 The lone pairs are then implied to occupy the two remaining spaces. 
 As PDB files do not specify lone pair location, no action is taken to specify this. 
 Considering each hydrogen bond location individually, the six possible molecule orientations will yield three orientations each of a proton-occupied or lone pair-occupied location. 
-Assuming the rotation is close-enough to random, the probability of occupation by either type is 
-
-3/6 = 1/2
+Assuming the rotation is close-enough to random, the probability of occupation by either type is $\frac{3}{6} = \frac{1}{2}$.
 
 While considering each molecule as a whole, (12 distinguishable, 6 indistinguishable)
 
@@ -114,6 +112,10 @@ This can easily be confirmed by iterating through all internal water molecules, 
 
 DefectsAverage,Internal = DefectsInternal (2.1) 2 ∗ NInternalMolecules
 
+\begin{equation}
+Defects_{Average, Internal} = \frac{Defects_{Internal}}{2*N_{Internal Molecules}}
+\end{equation}
+
 The method allows for a variable average number of defects to be considered and input as a value by the user. Future work may also include a maximum number of defects per molecule.
 
 \subsection{Removing Defects from the Lattice}
@@ -132,18 +134,40 @@ If it remains above the threshold, then the process outlined above is repeated u
 
 \section{Results of Approach}
 Initial results show a successful rotation of water molecules in the lattice to disorder the protons and successfully reclassify the system as ice I$_{h}$. 
-An example ice XI lattice of 432 water molecules converted to an ice Ih lattice is shown in figures 2.1 and 2.2.
+An example ice XI lattice of 432 water molecules converted to an ice Ih lattice is shown in figures \ref{fig:iceXI} and \ref{fig:iceIh}.
 
-Figure 2.1: Ice XI Lattice Before Rotation
-Figure 2.2: Ice Ih Lattice After Rotation
+\begin{figure}
+	
+	\centering
+	
+	\includegraphics[width=0.75\textwidth]{iceXI.png}
+	
+	\caption{Ice XI Lattice Before Rotation}
+	
+	\label{fig:iceXI}
+	
+\end{figure}
+
+\begin{figure}
+	
+	\centering
+	
+	\includegraphics[width=0.75\textwidth]{iceIh.png}
+	
+	\caption{Ice I$_{h}$ Lattice After Rotation}
+	
+	\label{fig:iceIh}
+	
+\end{figure}
+
 
 \subsection{Difficulties of Method / Known Issues}
-Upon closer inspection of figure \ref{fig:null}, there appears to be fragments of order within layers. 
+Upon closer inspection of figure \ref{fig:iceIh}, there appears to be fragments of order within layers. 
 Curiously, multiple regions of repetitive ordered fragments are in different orientations from the original structure. 
 Due to the nature of the pseudo-random orientation and the defect removal, molecules rotated to the original orientation may encourage neighboring high-defect molecules to rotate back to their original rotation or to a new pseudo-ordered orientation for multiple layers in localized fragments. 
 Additional study is necessary to confirm this. 
 Some inherent order may be retained by the method and might become a focus of future work. 
-With the caveat of some re- tained order, the method successfully and consistently rotates the provided structure in a pseudo-random fashion.
+With the caveat of some retained order, the method successfully and consistently rotates the provided structure in a pseudo-random fashion.
 
 A known issue exists where the user-specified average-defect value can cause an infinite loop where the method approaches, but does not achieve, the desired average defect count.
 \subsection{Suggested Improvements for Future Work}
