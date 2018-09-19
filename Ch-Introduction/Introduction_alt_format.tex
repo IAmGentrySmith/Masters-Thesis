@@ -1,0 +1,117 @@
+\chapter{Introduction}
+\label{ch:Introduction}
+
+I want a first paragraph that inspires the reader to continue reading. Maybe something with a quote or a question. Maybe not.
+
+Here I begin vaguely introducing the concepts behind computational chemistry. 
+Perhaps I begin with the development of the Hartree Fock method in the 70s and continue through to modern methods and the relative increase in computation power over the past 40 years. 
+Goal: something short and inspiring
+
+Here I think I will mention the studies on water, specifically in crystal growth and annealing. And then a comment on energy conformations in general (hinting at landscapes).
+
+
+
+The studies conducted that comprise this work were determined as a combination of collaborative efforts and larger research group goals with novel discoveries worth reporting.
+Collectively, they explore conformations of internal bond dihedrals, molecule orientations of microstates, and properties of interfacing substrates.
+These efforts are categorized and separated into three categories: ice crystal states, conformation landscapes, and ice interfaces. 
+A brief introduction of each and a literature review of relevant information is given below.
+
+\section{Ice Annealing}
+
+\subsection{Reason for Study}
+
+Ice crystals can take many forms based on properties like temperature and pressure. 
+The proton-disorganized orthorhombic form of ice known as I$_{h}$ is the form of ice most commonly found on earth (general understanding, CITATION NEEDED). 
+Due to the inherent randomness of the disorganization of the molecules within the crystal, computational efforts are limited in scope or instead utilize the proton-ordered orthorhombic form of ice XI  (general understanding, CITATION NEEDED).
+This project explores a method to produce a high quality pseudorandom ice I$_{h}$ crystal structure.
+
+\subsection{Bernal - Fowler Ice Rules}
+
+Citation! \cite{BFIceOG}
+
+There have been many works published on this topic, so I will have no problem obtaining a cohesive review. I plan to include the various forms of ice and focus on Ih and XI. This includes differences between the two in prevalence, environment, and synthesis (is synthesis the correct term here?). 
+
+I expect to focus on many thermodynamic properties and to focus on entropy as a driving force of difference in the modeled system. I will include publications of the effort to model a truly proton-disordered system and focus on the computational aspect. 
+
+I expect to do additional "literature review" when explaining my algorithm but am unsure of if it would be appropriate to mention here out of context.
+
+\subsection{Ice I$_{h}$ and Ice XI Structures}
+
+\subsection{Residual Entropy of Ice I$_{h}$ and Ice XI}
+
+Residual entropy is a thermodynamic property that greatly differs between ice I$_{h}$ and XI. 
+In general, entropy can be calculated for a system of $N$ molecules as $S = Nk\ln(w)$, where $k$ is the Boltzmann constant and $w$ is the number of real microstates corresponding to any macrostate.
+Residual entropy differs in calculation from entropy in that it generally refers to the entropy of a crystal near zero kelvin. 
+Linus \cite{PaulingIce} described the $w$ of very low temperature crystals to approach the number of orientations possible for each molecule with consideration to immediate neighbors. 
+Since ice I$_{h}$ is a 
+
+For a proton-disordered ice I$_{h}$ crystal, $w$ becomes $\frac{x}{2^{4}}$ where $x$ is the number of acceptable orientations within the crystal.
+
+\subsection{Hydrogen Bond Defects in Ice Crystals}
+
+Speak here about defects and how they quantitatively harm stability and why the defects need to be reduced in general ice I$_{h}$ structures.
+
+\section{Conformation Landscapes}
+
+For ROUGHLY forty years, computational programs have allowed investigators to model chemical systems with high accuracy to determine their physical properties.
+
+\subsection{Reason for Study}
+
+Any molecule with a chain length of at least four contains at least one dihedral. 
+In small molecules, the steric hindrance between the head and tail atoms are usually minimized in the fully gauche conformation to produce the lowest-energy conformer. 
+In larger and more bulky molecules, additional interactions may cause the dihedral to take other conformations in search of the lowest-energy conformation. 
+This project details the search for the lowest-energy conformer of a bulky hexagermane molecule in collaboration with Oklahoma State University's Charles Weinert and the complications and curiosities found within.
+
+\subsection{Chemical Modeling}
+
+\subsubsection{History of Chemical Modeling}
+
+Here I will introduce molecular modeling. This will begin with a brief history of the development of the field. It will continue through to mention the styles and goals of molecular modeling. Upon reaching modern techniques, I will discuss the benefits and costs associated with the major types of calculations (QM, MD, MC, etc). 
+
+\subsubsection{Hardware: Oklahoma State University's Cowboy Cluster}
+
+It would also be appropriate to mention the computational capabilities of OSU's Cowboy cluster.
+
+\subsubsection{Software}
+
+Software to mention: 
+
+Visualizing{Avogadro, UCSF Chimera(?)}, 
+
+Computing{GAMESS(?), Gaussian, NWChem(?), OOPSE}
+
+This also includes brief pros and cons about the programs and the general purpose of use in case.
+
+\subsubsection{Programming Languages}
+
+Another hugely important portion of this will include a choice in the programming languages used (mostly python (Cython-compiled!), some Perl and Bash).
+
+
+\subsection{Germanium Chain Work}
+
+This will be an interesting section as there is extremely little in terms of Ge computational work. Perhaps a broader search will yield interesting results. For sake of thoroughness, I will also include work on computational energy optimization in general and work through complications brought by the size of Ge. I might also include a portion on the statistical spread of conformations at a given temperature (internal energy?) I may include a sentence or paragraph on Gaussian-based publications. 
+
+\section{Two-Dimensional Water}
+
+Rose water is fairly new on the computational scene and so I may also include a review on the Mercedez-Benz water system as well as any other attempts to model water in two dimensions. For the rose potential system, I will review the Lennard-Jones potential  as well as any other equations/systems related to the rose potential.
+
+\subsection{Reason for Study}
+
+Ice is capable of interfacing with hydrophobic and amphipathic molecules. 
+These interfaces often have a specific range of polarity and \textbf{physicochemical} properties like atom type, charge, and the spacing of interfaces.
+While usually considered in the biochemical sense, molecular interfaces with water have additional applications. 
+If, for example, an interface had the properties to encourage ice growth, then it may be possible to observe significant ice growth above the expected freezing temperature. 
+
+Modeling water systems can be computationally intensive and require significant resources or a limited scope of system.
+One proven method of simplifying water modeling is to reduce the system by one dimension, creating a two-dimensional water.
+The 'Mercedez Benz' BN2D model and the more recent rose potential model are two examples of two-dimensional water models.
+Exploring and studying a two-dimensional water system allows for computationally-efficient investigating and can provide relevant information for a similar simulation with three-dimensional water.
+This project covers the usage of the two-dimensional rose potential model to observe ice growth on a substrate with varying properties.
+
+\subsection{Lennard-Jones Interaction}
+
+
+
+
+
+

@@ -1,0 +1,142 @@
+\chapter{Crystal and Liquid 2D Water at Interfaces}
+\label{ch:2DWater}
+
+
+\section{Two-Dimensional Water}
+
+EACH SUBSECTION: DEFINITION OF TERMS
+
+Rose water is fairly new on the computational scene and so I may also include a review on the Mercedez-Benz water system as well as any other attempts to model water in two dimensions. For the rose potential system, I will review the Lennard-Jones potential  as well as any other equations/systems related to the rose potential.
+
+\subsection{Lennard-Jones Potential}
+
+The Lennard-Jones Potential well is a soft-sphere model of interaction  between two spheres described with
+
+\begin{equation}
+V_{LJ} = 4\epsilon[(\frac{\sigma}{r})^{12} - (\frac{\sigma}{r})^{6}]
+\end{equation}
+where $V$ is the potential, $r$ is the distance between the center of two particles , $\sigma$ is the specific distance between the two particles where the potential is zero, and -$\epsilon$ is the minimum potential of the plot.
+\textbf{REFINE WORDING:}
+The plot is defined in $[0,\infty)$.
+As two particles approach from infinity, their interaction become negative - which is an attractive force - and will approach the global minimum of -$\epsilon$.
+The $r$ of this interaction is slightly larger than the combined radii of the two particles - which means they aren't quite touching - and is the equilibrium distance between the two particles.
+As $r$ decreases beyond the minimum and toward $\sigma$, the interaction strength increases and reaches zero as $r = \sigma$.
+At $r < \sigma$, 
+
+Potential digression:
+In a "hard-sphere" model, a particle's radius is firm, which is to say that the interaction potential is infinite at $r$ less than $\sigma$. 
+Basically a vertical line between two discrete values (usually $\epsilon$ and $\infty$)as the potential shifts from $r \geq \sigma$ to $r < \sigma$ (maybe include image?).
+The Lennard-Jones potential is a "soft-sphere" model, which blurs the line and replaces the vertical line with a functional representation. 
+This breaks with reality as the particles become "squishy" and the potential ramps up toward infinity as $r$ decreases. 
+The benefit to the soft-sphere model is that modeling programs can more-easily account for overlaps in particles during time steps than with hard-sphere models. 
+For example, a hard-sphere model of two particles interacting will likely not have a position where $r = \sigma$ and will potentially overlap. 
+At this overlap, the potential is infinity and will introduce a nearly infinite force at that instant of time. 
+Computer systems do not like having infinitely large repulsions suddenly introduced into a simulation. 
+
+
+\subsection{Modeling Water in Two Dimensions}
+
+Modeling in two dimensions sacrifice the "realism" of models in three dimensions, but reduce the computational load significantly.
+This allows researchers (scientists, chemists, digital magicians?) to test more simple designs in two dimensions as well as a higher volume of simulations at the same time/computational cost. 
+
+
+\subsubsection{Mercedes-Benz Model}
+
+The "Mercedes-Benz" BN2D model of water first proposed by \cite{MBWater} as "waterlike particles" are a popular two-dimensional representation of water. 
+ROUGH:
+details of shape of MB water
+
+The mathematical model used in the BN2D model is generated from the Percus-Yevick equation by substituting the approximation
+
+\begin{equation}
+c(X_{1}, X_{2}) = y(X_{1}, X_{2})f(X_{1}, X_{2})
+\end{equation}
+
+into the Percus-Yevick equation obtained from the Ornstein-Zernike relation 
+
+\begin{equation}
+h(X_{1}, X_{2}) = c(X_{1}, X_{2}) + \frac{\rho}{2\pi}\int c(X_{1}, X_{3}) h(X_{3}, X_{2})dX_{3}
+\end{equation}
+
+to produce the overall relation
+
+\begin{equation}
+y(X_{1}, X_{2}) = 1 + \frac{\rho}{2\pi}\int y(X_{1}, X_{3})f(X_{1}, X_{3}) \times \Big[ y(X_{3}, X_{2})f(X_{3}, X_{2}) + y(X_{3}, X_{2}) - 1 \Big] dX_{3}
+\end{equation}
+
+
+\subsubsection{Rose Potential Model}
+
+The rose potential is another model first introduced by \cite{RoseOG}.
+This model, while similar to the three-pronged BN2D, is notably different in that the rose potential model simplifies the model by use of a radial sinusoidal plot to make the three "prongs" of the particle. 
+
+\subsubsection{Two-Dimensional Modeling}
+
+Something other than OOPSE? (not seeing obvious answer other than "custom code modified/forked from existing 3D tools")
+
+The Object Oriented Parallel Simulation Engine (OOPSE) was introduced by \cite{OOPSE} as a relatively light-weight molecular dynamics simulation package focused on "efficiently integrating equations of motion for atom types with orientational degrees of freedom" (from abstract).
+While OOPSE was further developed and renamed OpenMD, a fork of OOPSE was developed specifically to model water in two dimensions.
+
+\subsection{Literature Review on Relevant Works}
+
+
+
+
+
+
+
+
+
+intro: Paragraph refreshing current work. Emphasize computational efficiency of Rose-Potential over Mercedez-Benz model.
+
+\section{Goal of Project}
+
+The objective of this work was to model two-dimensional water with a surface designed to discourage crystal growth at freezing temperatures. 
+The design of the surface was the primary focus. 
+Successfully designing a surface capable of discouraging water ice formation at freezing temperatures would provide valuable information in designing a three-dimensional model of the same type at a reduced computational cost. 
+
+Idea: adjust freezing point depression to be freezing point modification.
+
+\section{Tools and Terms}
+
+Either a refresh from intro or a detailed explanation of OOPSE and the reduced terms.
+
+\subsection{OOPSE in 2D}
+
+Detail differences in computation system that Dr. Fennell developed to allow 2D MD(?) on a 3D program.
+
+\subsection{Reduced Terms: 2D analogues}
+
+Detail differences in dimensionality and define the reduced dimensions. Still working on the understanding/equations.
+
+\section{Designing System}
+
+Include: 
+ensemble, 
+thermodynamic variables, 
+box attributes (size, pressure, temp, etc), 
+number of waters,
+surface (size, spacing between beads of surface, charges, LJ values, etc)
+
+\subsection{Defining the Surface}
+
+Explain how to develop the surface in the program and how to build a custom surface 
+(walk through surface builder here)
+
+\subsubsection{Manipulation of LJ Potential}
+
+Manipulate $\sigma$ and $\epsilon$ values to effectively adjust the radius and interaction strength of surface beads.
+
+\subsubsection{Manipulation of bead spacing}
+
+Detail design of optimizing bead spacing for freezing encouragement or disruption.
+
+\section{Results}
+
+Success of freezing point elevation, pending results for freezing point depression
+
+\subsection{Future Work}
+
+Continued efforts to disrupt crystal growth on the surface. 
+
+

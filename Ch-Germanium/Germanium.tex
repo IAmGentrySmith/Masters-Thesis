@@ -1,0 +1,73 @@
+\chapter{Germanium Compounds and QM Concerns}
+\label{ch:Germanium}
+
+\section{Modeling Germanium Compounds}
+
+EACH SUBSECTION: DEFINITION OF TERMS
+
+This will be an interesting section as there is extremely little in terms of Ge computational work. Perhaps a broader search will yield interesting results. For sake of thoroughness, I will also include work on computational energy optimization in general and work through complications brought by the size of Ge. I might also include a portion on the statistical spread of conformations at a given temperature (internal energy?) I may include a sentence or paragraph on Gaussian-based publications. 
+
+\subsection{Tools for Modeling Germanium}
+
+Computational Requirements and reasons for those requirements.
+
+Germanium is not the most-studied atom in computational works.
+The majority of Germanium studies are done with Gaussian (citation needed?).
+
+\subsection{Computational Complexity of Germanium Compounds}
+
+Draw-backs of modeling Germanium. Uncommon but still necessary for wetwork.
+
+\subsection{Literature Review on Relevant Works}
+
+Make note of various Germanium modeling research. Make note of tools and methods used.
+
+
+
+
+
+
+
+
+
+In the fall of 2016, the Fennell Group was contacted by Dr. Scott Weinert to study a germanium-based compound comprised of a backbone hexagermane chain, two phenyl rings off the internal atoms, and isopropyl groups on the terminal germanium atoms (hereafter referred to as "hexagermane"). 
+Dr. Weinert's lab had received curious results from a prior collaborator and sought confirmation by a second computational group. 
+
+\section{Current Methods}
+
+Reiterate the scarcity of extant Germanium studies. Probably definitely reference Dr. Weinert's work.
+
+\subsection{Precursory Work}
+
+Dr. Weinert's lab had received curious results from a prior collaborator and sought confirmation by a second group. 
+
+From the information provided in \ref{fig:Collab6GeOG}, the energy from Density Functional Theory calculations suggest that the most energetically-favorable conformation of hexagermane be the trans-cis-trans form. 
+
+\begin{table}[]
+	\centering
+	\caption{Collaborator's Hexagermane Energies by Conformation \\ (Density Function Theory, Unknown Basis Set)}
+	\label{fig:Collab6GeOG}
+	\begin{tabular}{llll}
+		\textbf{Conformation} & Energy ($E_{h}$)    & $\Delta$ Energy ($E_{h}$) & $\Delta$ Energy ($\frac{Kj}{mol}$) \\ \cline{2-4} 
+		Trans-coplanar        & -15014.8403143 & 0.0066255            & 17.39525025                        \\
+		Cis-Trans-Cis         & -15014.7983311 & 0.0486087            & 127.6221418                        \\
+		Trans-Cis-Trans       & -15014.8469398 & 0.0000000            & 0                                  \\
+		Cis-Trans-Trans       & -15014.8246918 & 0.0222480            & 58.412124                         
+	\end{tabular}
+\end{table}
+
+\section{Modeling Germanium molecules in Gaussian}
+
+This is the meat of the chapter - the Gaussian problem.
+
+\subsection{Recognition of Problem}
+
+Include Dr. Fennell's image. Relate to strangeness of collaborator's data. FRAME PROBLEM WITH THEORY AND BASIS SET
+
+\subsection{Confirmation of Germanium consistency from other systems}
+
+A minor note of confirmation of Gaussian problem from consistent results from other programs with same theory and basis set.
+
+\subsection{Correcting the Issue}
+
+Use basis set from Basis Set Exchange, detail selection and usage in input settings.
