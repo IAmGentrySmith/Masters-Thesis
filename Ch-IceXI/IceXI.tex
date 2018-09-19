@@ -1,8 +1,8 @@
 \chapter{On Algorithms for Building and Sampling Disordered Crystal States}
 \label{ch:iceXI}
 
-TODO: FIX ICE IH -
-As discussed in the introduction, ice Ih modeling comes with computational challenges. 
+TODO: FIX ICE IH - I$_{h}$
+As discussed in the introduction, ice I$_{h}$ modeling comes with computational challenges. 
 The problem of generating a random proton-disordered crystal with only ordered pseudorandom tools presents as a technical impossibility. 
 However, through the usage of averages and distributions, it is possible to generate a pseudorandom proton-disordered crystal that behaves similar to a truly random proton-disordered crystal.
 
@@ -51,19 +51,19 @@ words????
 
 
 \section{Framing the Problem}
-While ice Ih is known as the most common form of ice found on the planet, it is much more difficult to generate than an ice XI lattice. 
+While ice I$_{h}$ is known as the most common form of ice found on the planet, it is much more difficult to generate than an ice XI lattice. 
 The ease of generation of an ice XI structure stems from the repetition of a unit cell with consistent layering and orientation throughout the crystal lattice. 
 All protons and lone pairs are ordered in a consistent manner that produce proper hydrogen bonds. 
 As such, lattice defects do not naturally arise in the computational structure without running a simulation with sufficient energy to perturb the system.
 
-With ice Ih crystals, the proton-disordered form introduces entropy by way of ro- tational disorder. 
+With ice I$_{h}$ crystals, the proton-disordered form introduces entropy by way of ro- tational disorder. 
 As the protons and lone pairs are no longer consistently ordered, hydrogen bonds may no longer form properly at all interaction sites. 
 The interaction of proton with proton or lone pair with lone pair are not hydrogen bonds and are con- sidered defects in the lattice. 
 An ice structure of randomly oriented molecules without consideration of hydrogen bonds will likely produce defects at many interaction sites across the lattice and weaken the integrity of the system, leading to stability problems while running simulations. 
 In generating the crystal, the cause of these defects must be considered and countered effectively.
 
-\section{Method of Generating an Ice Ih Crystal}
-This approach to generating an ice Ih structure involves beginning with a proton- ordered ice XI structure, randomly rotating all water molecules, and then recursively perturbing high-defect regions to reduce the number of overall defects. 
+\section{Method of Generating an Ice I$_{h}$ Crystal}
+This approach to generating an ice I$_{h}$ structure involves beginning with a proton- ordered ice XI structure, randomly rotating all water molecules, and then recursively perturbing high-defect regions to reduce the number of overall defects. 
 As detailed later, defect thresholds can be adjusted to fit the desired system.
 \subsection{Generation of an ice XI crystal}
 TODO
@@ -131,7 +131,7 @@ Once the system has completed iterating through the lattice, the average defect 
 If it remains above the threshold, then the process outlined above is repeated until the criteria is met.
 
 \section{Results of Approach}
-Initial results show a successful rotation of water molecules in the lattice to disorder the protons and successfully reclassify the system as ice Ih. 
+Initial results show a successful rotation of water molecules in the lattice to disorder the protons and successfully reclassify the system as ice I$_{h}$. 
 An example ice XI lattice of 432 water molecules converted to an ice Ih lattice is shown in figures 2.1 and 2.2.
 
 Figure 2.1: Ice XI Lattice Before Rotation
