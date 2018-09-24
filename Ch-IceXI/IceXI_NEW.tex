@@ -60,6 +60,17 @@ In generating the crystal, the cause of these defects must be considered and cou
 
 \section{Method Design}
 
+% overview
+% 0. get pdb ice xi DONE
+% 1. read in pdb ice xi
+% 2. identify molecules (H2O)
+% 3. identify molecule neighbors
+% 4. identify corners/edges (in progress)
+% 5. for each molecule, identify the tetrahedral spaces
+% 6. for each molecule, "randomly" place the two protons
+% 7. Check hydrogen bond defect rate
+% 8. Fix as necessary (in progress)
+
 \subsection{Overview}
 
 The big idea is to convert an easy-to-make ice XI crystal into an ice Ih crystal.
@@ -67,28 +78,30 @@ Because the key difference in structure is the proton-orderedness, it might be p
 
 \subsection{Selection of Methods}
 
-Python was chosen as the language of the tool due to the versatility of the language and the ease of development due to the "pseudocode" written style of the language.
-Python 2.7.11 was used for the conversion tool due to familiarity with the language and the availability of scientific tools including SciPy and NumPy. 
+Python was chosen as the language of the tool due to the versatility of the language and the ease of development due to the "pseudocode" written style of the language and the availability of scientific packages including SciPy and NumPy. 
+Python version 2.7 was specifically chosen due to familiarity with the language.
 Crystal files where defined and saved as Protein Data Bank (.pdb) files as this format allows for defining multiple molecules within a larger structure with a simple X, Y, Z grid position format. 
 
 \subsection{Generation of Source Ice XI}
 
 This is Dr. Fennell's method to create an ice XI pdb file.
 
-\subsection{Converting Ice XI into Ice Ih}
+\subsection{Source Ingestion}
 
-% overview
+It is important that the crystal be read and stored in an efficient method to keep relevant information about each molecule easily accessible. 
+As the file is read in, each molecule is stored as an entry in a multidimensional array where the first index is the molecule number. 
+Further, the second index defines the molecule number where 0 is oxygen and 1 and 2 are the protons. 
+The third, fourth, and fifth indices define the X, Y, and Z position coordinates. 
 
-1. read in pdb ice xi
-2. identify molecules (H2O)
-3. identify molecule neighbors
-4. identify corners/edges (in progress)
-5. for each molecule, identify the tetrahedral spaces
-6. for each molecule, "randomly" place the two protons
-7. Check hydrogen bond defect rate
-8. Fix as necessary (in progress)
+\subsubsection{Identifying Neighboring Molecules}
 
-
+Identifying the neighboring molecules proved computationally difficult. 
+The most effective method is to find the closest four molecules by computing a distance calculation between every two oxygen atoms.
+This ensures every molecule is considered, but also presents significant hurdles.
+First, a distance calculation utilizes an extremely computationally-inefficient square root calculation, which can be ignored by instead calculating the squared-distance between molecules and finding the lowest values.
+Second, molecules on the walls and edges of the molecule will not have four neighbors in the non-periodic crystal. 
+This is accounted for by shifting all six sides to make a pseudo-periodicity for these edge cases. 
+Those periodically-neighboring molecules are flagged with a shifting value in the neighboring atom array by specifying a positive or negative shift in the x, y, or z axis values. 
 
 \section{Results}
 
