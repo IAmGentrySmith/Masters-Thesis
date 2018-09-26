@@ -99,9 +99,13 @@ Identifying the neighboring molecules proved computationally difficult.
 The most effective method is to find the closest four molecules by computing a distance calculation between every two oxygen atoms.
 This ensures every molecule is considered, but also presents significant hurdles.
 First, a distance calculation utilizes an extremely computationally-inefficient square root calculation, which can be ignored by instead calculating the squared-distance between molecules and finding the lowest values.
+
 Second, molecules on the walls and edges of the molecule will not have four neighbors in the non-periodic crystal. 
 This is accounted for by shifting all six sides to make a pseudo-periodicity for these edge cases. 
 Those periodically-neighboring molecules are flagged with a shifting value in the neighboring atom array by specifying a positive or negative shift in the x, y, or z axis values. 
+Unfortunately, the necessary code to implement the periodically-neighboring molecule detections requires a major rewrite of the entire tool and has not yet been implemented.
+
+
 
 \section{Results}
 
