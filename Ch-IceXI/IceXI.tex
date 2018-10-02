@@ -102,11 +102,52 @@ First, a distance calculation utilizes an extremely computationally-inefficient 
 
 Second, molecules on the walls and edges of the molecule will not have four neighbors in the non-periodic crystal. 
 This is accounted for by shifting all six sides to make a pseudo-periodicity for these edge cases. 
-Those periodically-neighboring molecules are flagged with a shifting value in the neighboring atom array by specifying a positive or negative shift in the x, y, or z axis values. 
+Those periodically-neighboring molecules are flagged with a shifting value in the neighboring atom array by specifying a translation in the x, y, or z axis values. 
 Unfortunately, the necessary code to implement the periodically-neighboring molecule detections requires a major rewrite of the entire tool and has not yet been implemented.
 
-\subsubsection{Problems with Periodic Expansion in Method}
+Once these closest neighboring oxygen atoms have been discovered, the appropriate tetrahedral position is identified and marked 
+
+
+\subsubsection{Problems with Method}
 % SO MANY PROBLEMS
+
+Problems include *problems*
+
+
+\subsection{Defining Tetrahedral Positions}
+
+An important aspect of pseudorandom selection is the existence of a bank of options. % REWRITE
+Using the ingestion portion to calculate and store all tetrahedral possibilities proves useful.
+For each water molecule, the first two tetrahedral positions are known by the positions of the two hydrogen atoms. 
+The other two positions are found by rotating one hydrogen atom 120$^{\circ}$ twice about the vector from the oxygen atom through the other hydrogen atom and storing the resulting positions as tetrahedral positions three and four. 
+This does not produce an exactly correct tetrahedral position of potential hydrogen atoms due to the slight acuteness of the H-O-H bond created by forces from the two lone pairs of electrons. 
+% EXACTLY HOW DIFFERENT? 
+% WHAT SPECIFIC FORCES?
+Fortunately, this difference is sufficiently small for visualization programs like Avogadro to still recognize hydrogen bonds between a rotated hydrogen atom and corresponding neighboring lone pair. 
+Currently, the method relies on a very soft annealing process by a simulation package to minimize the effect of this hydrogen bond imperfection. 
+% TALKING OUT YOUR ASS. FIND A SOLUTION
+Future versions of this method may account for the variations.
+
+\subsection{Pseudorandom Rearrangement of Water Molecules}
+
+Once the tetrahedral positions have been defined, each water molecule is ready to rotate.
+What may seem the most crucial step in this methods ends up being the most simple.
+As designed, the rotation of water molecules is as simple as using a stepwise iterator to pseudorandomly select two tetrahedral positions for the hydrogen bonds and store the new positions in a new crystal array.
+An extremely important note is that this rearrangement does not consider the orientations of neighboring molecules and likely introduces defects of hydrogen - hydrogen and lone pair - lone pair interactions.
+The likelihood of a defect-free interaction lattice forming is nearly zero and is assumed to have a great deal of defects within the lattice. 
+% PROVE IT?
+% SHOW MATH WHY A LOT OF DEFECTS EXIST
+
+
+\subsection{Detecting Hydrogen Bond Defects}
+
+After all water molecules have been rearranged, defects between incorrectly-interacting hydrogen bonds must be found and corrected.
+The first step, discovering the defects, relies on the detection
+
+
+\subsection{Correcting Hydrogen Bond Defects}
+
+asdf
 
 
 \section{Results}
