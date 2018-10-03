@@ -105,7 +105,7 @@ This is accounted for by shifting all six sides to make a pseudo-periodicity for
 Those periodically-neighboring molecules are flagged with a shifting value in the neighboring atom array by specifying a translation in the x, y, or z axis values. 
 Unfortunately, the necessary code to implement the periodically-neighboring molecule detections requires a major rewrite of the entire tool and has not yet been implemented.
 
-Once these closest neighboring oxygen atoms have been discovered, the appropriate tetrahedral position is identified and marked 
+Once these closest neighboring oxygen atoms have been discovered, the appropriate interacting tetrahedral position is identified by finding the closest of the four tetrahedral positions using the same squared-distance calculation with the four defined tetrahedral positions detailed in the next subsection.
 
 
 \subsubsection{Problems with Method}
@@ -142,19 +142,32 @@ The likelihood of a defect-free interaction lattice forming is nearly zero and i
 \subsection{Detecting Hydrogen Bond Defects}
 
 After all water molecules have been rearranged, defects between incorrectly-interacting hydrogen bonds must be found and corrected.
-The first step, discovering the defects, relies on the detection
+Discovering the defects relies on the detection of neighboring molecules and the appropriate interacting hydrogen atom or electron lone pair. 
+% gap
+
 
 
 \subsection{Correcting Hydrogen Bond Defects}
 
+Once the hydrogen bond defects have been discovered and marked, each needs to be corrected.
+The current design of the method allows for the user to specify a threshold of defects as an average per molecule. 
+For example, a threshold of 2.5 will allow a maximum of 3 defects on any given molecule and will continue to correct defects until the average number of defects per molecule is equal to or below 2.5.
+% how does it search
+
+
+
+\section{Results of Method}
+
 asdf
 
+\section{Comments on Limitations and Proposed Improvements}
 
-\section{Results}
+During the hydrogen bond defect correction step, a weakness in the design is that any clustering or regions of high defect density will not be noticed.
+This allows the existence of a highly-defective region within the larger structure that could potentially cause problems when the crystal in used in simulations. 
+The prevalence and occurrence of these 
 
-\section{Ongoing and Planned Work}
-
-
+A potential solution with partial development will score regions based on the number of defects as a weighted function expanding out from a central molecule for N connections. 
+For example, 
 
 
 
