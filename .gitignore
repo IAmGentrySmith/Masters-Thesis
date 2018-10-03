@@ -12,3 +12,5 @@
 *.gz
 *.toc
 *.lot
+.DS_Store
+
