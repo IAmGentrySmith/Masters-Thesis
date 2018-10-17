@@ -75,8 +75,9 @@ In generating the crystal, the cause of these defects must be considered and cou
 
 The big idea is to convert an easy-to-make ice XI crystal into an ice Ih crystal.
 Because the key difference in structure is the proton-orderedness, it might be possible to rearrange the water molecule orientations in a pseudorandom way to create an ice Ih crystal.
+This section walks through the method developed to convert ice XI into ice Ih, the results of initial testing, and imperfections discovered in the design.
 
-\subsection{Selection of Methods}
+\subsection{Selection of Software Tools}
 
 Python was chosen as the language of the tool due to the versatility of the language and the ease of development due to the "pseudocode" written style of the language and the availability of scientific packages including SciPy and NumPy. 
 Python version 2.7 was specifically chosen due to familiarity with the language.
@@ -84,7 +85,9 @@ Crystal files where defined and saved as Protein Data Bank (.pdb) files as this 
 
 \subsection{Generation of Source Ice XI}
 
-This is Dr. Fennell's method to create an ice XI pdb file.
+This is Dr. Fennell's method to create an ice XI pdb file. 
+Basically, the ice XI unit cell of eight water molecules is repeated as desired to create a sufficiently large crystal.
+The primarily used crystal consisted of a 3 x 3 x 6 unit cell repetition totaling 432 water molecules.
 
 \subsection{Source Ingestion}
 
@@ -93,7 +96,7 @@ As the file is read in, each molecule is stored as an entry in a multidimensiona
 Further, the second index defines the molecule number where 0 is oxygen and 1 and 2 are the protons. 
 The third, fourth, and fifth indices define the X, Y, and Z position coordinates. 
 
-\subsubsection{Identifying Neighboring Molecules}
+\subsection{Identifying Neighboring Molecules}
 
 Identifying the neighboring molecules proved computationally difficult. 
 The most effective method is to find the closest four molecules by computing a distance calculation between every two oxygen atoms.
@@ -107,20 +110,14 @@ Unfortunately, the necessary code to implement the periodically-neighboring mole
 
 Once these closest neighboring oxygen atoms have been discovered, the appropriate interacting tetrahedral position is identified by finding the closest of the four tetrahedral positions using the same squared-distance calculation with the four defined tetrahedral positions detailed in the next subsection.
 
-
-\subsubsection{Problems with Method}
-% SO MANY PROBLEMS
-
-Problems include *problems*
-
-
 \subsection{Defining Tetrahedral Positions}
 
 An important aspect of pseudorandom selection is the existence of a bank of options. % REWRITE
 Using the ingestion portion to calculate and store all tetrahedral possibilities proves useful.
 For each water molecule, the first two tetrahedral positions are known by the positions of the two hydrogen atoms. 
 The other two positions are found by rotating one hydrogen atom 120$^{\circ}$ twice about the vector from the oxygen atom through the other hydrogen atom and storing the resulting positions as tetrahedral positions three and four. 
-This does not produce an exactly correct tetrahedral position of potential hydrogen atoms due to the slight acuteness of the H-O-H bond created by forces from the two lone pairs of electrons. 
+
+This does not produce an exactly correct tetrahedral position of potential hydrogen atoms due to the slight acuteness of the H-O-H bond created by the variance in repulsive forces between the two lone pairs of electrons and two hydrogen atoms. 
 % EXACTLY HOW DIFFERENT? 
 % WHAT SPECIFIC FORCES?
 Fortunately, this difference is sufficiently small for visualization programs like Avogadro to still recognize hydrogen bonds between a rotated hydrogen atom and corresponding neighboring lone pair. 
@@ -143,22 +140,51 @@ The likelihood of a defect-free interaction lattice forming is nearly zero and i
 
 After all water molecules have been rearranged, defects between incorrectly-interacting hydrogen bonds must be found and corrected.
 Discovering the defects relies on the detection of neighboring molecules and the appropriate interacting hydrogen atom or electron lone pair. 
-% gap
-
+As previously discussed, the initial data ingest records and detects the nearest water molecules and determines the tetrahedral position containing the interacting space, be it electron lone pair or hydrogen atom. 
+From that data, the detection of a valid hydrogen bond is as simple as checking both all interacting tetrahedral positions and confirming that they both do not contain or lack a hydrogen atom.
 
 
 \subsection{Correcting Hydrogen Bond Defects}
 
 Once the hydrogen bond defects have been discovered and marked, each needs to be corrected.
+The most direct approach to this is to sequentially walk through each defect and repeat the pseudorandom rotation until the number of defective regions is decreased or zero, depending on a user-specified value.
+
+
 The current design of the method allows for the user to specify a threshold of defects as an average per molecule. 
 For example, a threshold of 2.5 will allow a maximum of 3 defects on any given molecule and will continue to correct defects until the average number of defects per molecule is equal to or below 2.5.
+As of the current implementation, the method cannot reliably produce a crystal with a threshold below 2 as it will continue to search until the system runs out of available memory and crash without recording any new structure.
 % how does it search
 
 
 
 \section{Results of Method}
 
-asdf
+When supplied with an input ice XI crystal, an output structure with rotated water molecule orientations strictly consistent with ice Ih describes a success at the most basic level.
+An example before and after of the method is given in figures \ref{fig:iceXI} and \ref{fig:iceIh}
+
+\begin{figure}
+	
+	\centering
+	
+	\includegraphics[width=0.75\textwidth]{iceXI.png}
+	
+	\caption{"Before" image of Ice XI}
+	
+	\label{fig:iceXI}
+	
+\end{figure}
+
+\begin{figure}
+	
+	\centering
+	
+	\includegraphics[width=0.75\textwidth]{iceIh.png}
+	
+	\caption{"After" image of generated ice Ih}
+	
+	\label{fig:iceIh}
+	
+\end{figure}
 
 \section{Comments on Limitations and Proposed Improvements}
 
