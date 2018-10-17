@@ -87,7 +87,7 @@ Crystal files where defined and saved as Protein Data Bank (.pdb) files as this 
 
 This is Dr. Fennell's method to create an ice XI pdb file. 
 Basically, the ice XI unit cell of eight water molecules is repeated as desired to create a sufficiently large crystal.
-The primarily used crystal consisted of a 3 x 3 x 6 unit cell repetition totaling 432 water molecules.
+The primarily used crystal consists of a 3 x 3 x 6 unit cell repetition totaling 432 water molecules.
 
 \subsection{Source Ingestion}
 
@@ -147,21 +147,19 @@ From that data, the detection of a valid hydrogen bond is as simple as checking 
 \subsection{Correcting Hydrogen Bond Defects}
 
 Once the hydrogen bond defects have been discovered and marked, each needs to be corrected.
-The most direct approach to this is to sequentially walk through each defect and repeat the pseudorandom rotation until the number of defective regions is decreased or zero, depending on a user-specified value.
-
+The most direct approach to this is to sequentially walk through each defect and repeat the pseudorandom rotation until the number of defective regions is zero or a user-specified value.
 
 The current design of the method allows for the user to specify a threshold of defects as an average per molecule. 
 For example, a threshold of 2.5 will allow a maximum of 3 defects on any given molecule and will continue to correct defects until the average number of defects per molecule is equal to or below 2.5.
 As of the current implementation, the method cannot reliably produce a crystal with a threshold below 2 as it will continue to search until the system runs out of available memory and crash without recording any new structure.
-% how does it search
+
 
 
 
 \section{Results of Method}
 
 When supplied with an input ice XI crystal, an output structure with rotated water molecule orientations strictly consistent with ice Ih describes a success at the most basic level.
-An example before and after of the method is given in figures \ref{fig:iceXI} and \ref{fig:iceIh}
-
+An example before and after of the method is given in figures \ref{fig:iceXI} and \ref{fig:iceIh}.
 \begin{figure}
 	
 	\centering
@@ -173,7 +171,6 @@ An example before and after of the method is given in figures \ref{fig:iceXI} an
 	\label{fig:iceXI}
 	
 \end{figure}
-
 \begin{figure}
 	
 	\centering
@@ -185,6 +182,14 @@ An example before and after of the method is given in figures \ref{fig:iceXI} an
 	\label{fig:iceIh}
 	
 \end{figure}
+% FIX BELOW
+The generated ice Ih has been rotated.
+% FIX ABOVE
+When following the subsequent layers in the crystal, patterns emerge. 
+Inconsistently, some rows of waters remain consistent.
+Some of these are a uniform rotation of both hydrogen atoms, while others are just one consistently placed hydrogen atom.
+Multiple trials yield internally unique results, yet all contain these consistent layers.
+
 
 \section{Comments on Limitations and Proposed Improvements}
 
