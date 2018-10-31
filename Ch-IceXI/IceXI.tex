@@ -142,15 +142,23 @@ After all water molecules have been rearranged, defects between incorrectly-inte
 Discovering the defects relies on the detection of neighboring molecules and the appropriate interacting hydrogen atom or electron lone pair. 
 As previously discussed, the initial data ingest records and detects the nearest water molecules and determines the tetrahedral position containing the interacting space, be it electron lone pair or hydrogen atom. 
 From that data, the detection of a valid hydrogen bond is as simple as checking both all interacting tetrahedral positions and confirming that they both do not contain or lack a hydrogen atom.
+Additionally, each water molecule keeps a count of how many defects are present among the four positions. 
+This allows for contextual changes during the correction step.
 
 
 \subsection{Correcting Hydrogen Bond Defects}
 
 Once the hydrogen bond defects have been discovered and marked, each needs to be corrected.
 The most direct approach to this is to sequentially walk through each defect and repeat the pseudorandom rotation until the number of defective regions is zero or a user-specified value.
+The current implementation sorts the defect list by the number of defects and attempts to fix the most defective molecules first.
+The most defective molecules may include defects impossible to solve by simple rotation, specifically when neighboring molecules have collectively directed three or four hydrogen atoms or electron lone pairs at the target water. 
+These can only be solved by adjusting one or more of the neighboring molecules until the number of hydrogen atoms and electron lone pairs have balanced.
+Unfortunately, this high-defect problem can quickly escalate if the neighboring molecules contain the same problem of unbalanced hydrogen atoms and electron lone pairs. 
+The current solution is to recursively check for and fix these impossible interactions first, but has not yet yielded a defect-free crystal in testing.
 
 The current design of the method allows for the user to specify a threshold of defects as an average per molecule. 
 For example, a threshold of 2.5 will allow a maximum of 3 defects on any given molecule and will continue to correct defects until the average number of defects per molecule is equal to or below 2.5.
+Because each of these defects will be counted twice, once for each molecule, the total number of defects in a crystal can be determined by multiplying the average defect value by the number of molecules and dividing by two.
 As of the current implementation, the method cannot reliably produce a crystal with a threshold below 2 as it will continue to search until the system runs out of available memory and crash without recording any new structure.
 
 
@@ -188,7 +196,15 @@ The generated ice Ih has been rotated.
 When following the subsequent layers in the crystal, patterns emerge. 
 Inconsistently, some rows of waters remain consistent.
 Some of these are a uniform rotation of both hydrogen atoms, while others are just one consistently placed hydrogen atom.
-Multiple trials yield internally unique results, yet all contain these consistent layers.
+Multiple trials yield internally unique results, yet all contain these strange consistencies.
+This may be due to some accidental pattern in the method's implementation.
+
+
+\section{Comparison with Other Methods}
+% USE BUTH PAPER
+\subsection{benefits of own method over others}
+\subsection{benefits of other methods over this}
+
 
 
 \section{Comments on Limitations and Proposed Improvements}
@@ -197,15 +213,16 @@ During the hydrogen bond defect correction step, a weakness in the design is tha
 This allows the existence of a highly-defective region within the larger structure that could potentially cause problems when the crystal is used in simulations. 
 The prevalence and occurrence of these defects have not been studied, but seem a natural inevitability of statistics. 
 % SHOW THE STATS
-
 A potential solution with partial development will score regions based on the number of defects as a weighted function expanding out from a central molecule for N connections. 
-For example, 
-
-
-
-
-
-
+For example, consider a given molecule defined as level 1. 
+The neighboring four molecules are defined as level 2, and continued onward excepting already-defined molecules out to an N$^{th}$ level. 
+The number of defects in each level can be counted and averaged.
+Then a depressive factor along the lines of $\frac{1}{level}$ can be used to diminish the value of defects further away from the first-level molecule.
+This would create a value for each molecule that shows the relative density of defects centered about that specific molecule and could even be plotted as a gradient change within the crystal.
+The equation would be something like:
+\begin{equation}
+Value = \sum_{l=1}^{N_{levels}} \Big[\frac{1}{l} * \frac{1} {N_{molecules}} *\sum_{m=1}^{N_{molecules}}[N_{defects, m}]\Big]
+\end{equation}
 
 
 

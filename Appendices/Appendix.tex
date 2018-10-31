@@ -1,7 +1,7 @@
 \chapter{Ice Ih to Ice XI Conversion}
 \label{ch:App:CrystalDisorg}
 
-Listed below is the source code utilized in the conversion of a PDB Ice Ih structure into an Ice XI structure.
+Listed below is the source code utilized in the conversion of a PDB Ice Ih structure into an Ice XI structure. This code is functional in a Python 2.7 environment with NumPy and SciPy packages included.
 
 \section{Code: PDBDisorganize.py}
 \lstinputlisting[language=Python,breaklines=true]{codes/PDBDisorganize.py}
@@ -18,7 +18,7 @@ Listed below are two example Germanium PDB files. The first is for the end-goal 
 \section{Code: hexagermane-transall.pdb}
 \lstinputlisting[breaklines=true]{codes/hexagermane-transall.pdb}
 
-The above molecule contains 154 atoms and 153 bonds, making it extremely computationally expensive for regular(WHICH) QM calculations. This made utilizing the large molecule as a trial system unreasonable due to the prohibitively long computation time for each conformation, assuming the conformation calculation would complete at all.
+The above molecule contains 154 atoms and 153 bonds, making it extremely computationally expensive for regular QM calculations. This made utilizing the large molecule as a trial system unreasonable due to the prohibitively long computation time for each conformation, assuming the conformation calculation would complete at all.
 
 The below PDB file is the simplified butagermane with fully protonated Germanium atoms. As a significantly smaller system with only 14 atoms and 13 bonds, the relatively short computation time allowed the trial system to move with relative ease.
 
@@ -28,3 +28,4 @@ The below PDB file is the simplified butagermane with fully protonated Germanium
 \chapter{Two-Dimensional Rose-Potential Water}
 
 words
+

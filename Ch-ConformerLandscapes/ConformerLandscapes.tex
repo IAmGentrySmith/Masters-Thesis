@@ -1,13 +1,13 @@
 \chapter{Sampling Conformation Landscapes by Rotatable Bond Degrees of Freedom}
 \label{ch:ConformationLandscape}
 
-\section{Conformation Landscapes}
+\section{Introduction to Topic}
 
 EACH SUBSECTION: DEFINITION OF TERMS
 
 For ROUGHLY forty years, computational programs have allowed investigators to model chemical systems with high accuracy to determine their physical properties.
 
-\subsection{A Brief History of Conformation Landscapes}
+\subsection{A Brief History on Conformation Landscapes}
 
 \subsubsection{Levinthal's Paradox}
 
@@ -31,9 +31,9 @@ It would also be appropriate to mention the computational capabilities of OSU's 
 
 Software to mention: 
 
-Visualizing{Avogadro, UCSF Chimera(?)}, 
+Visualization{Avogadro, UCSF Chimera}
 
-Computing{GAMESS(?), Gaussian, NWChem(?), OOPSE}
+Computing{GAMESS, Gaussian, NWChem, Octopus}
 
 This also includes brief pros and cons about the programs and the general purpose of use in case.
 
@@ -56,7 +56,10 @@ Another hugely important portion of this will include a choice in the programmin
 intro: 
 Reference introduction: inherent complexity of "objective" or "exhaustive" search, levinthal's paradox as it applies to non-biological systems, ELSE?
 
-\section{Approach to Solution: Variable-Resolution Search}
+
+
+
+
 
 Run through a set of dihedral positions at a constant interval. 
 Selection of lowest-energy optimization organized on dihedral values. 
@@ -64,7 +67,7 @@ Quick determination of importance of dihedral based on how heavily it impacts in
 Splitting "best" dihedral into smaller interval to repeat the process. 
 
 This method produces an interesting visual plot with varying resolution at different X values (if plotting energy vs. dihedral).
-Example given on \ref{fig:variableResolutionSample}.
+Example given in figure \ref{fig:variableResolutionSample}.
 
 \begin{figure}
 	
@@ -78,11 +81,11 @@ Example given on \ref{fig:variableResolutionSample}.
 		
 \end{figure}
 
-\subsection{Design of System}
+\section{Design of System}
 
 System designed in Python for ease of development and compiled via Cython for computational efficiency. 
 Utilizes Gaussian and UCSF Chimera, but can be redesigned for any computational programs that accomplish the desired tasks.
-Overview of system flow given in \ref{fig:VRSDesign}.
+Overview of system flow given in figure \ref{fig:VRSDesign}.
 
 \begin{figure}
 	
@@ -96,9 +99,9 @@ Overview of system flow given in \ref{fig:VRSDesign}.
 	
 \end{figure}
 
-This design, with implementation being a current work in progress, but should{\texttrademark} work as a cascade toward the lowest energy conformation in each case.
+This design, with implementation being a current work in progress, but should{\texttrademark} work as a cascade toward the lowest energy conformer in each case.
 
-\subsubsection{Variation of Theory and Basis Set Usage by System Size and largest atom type}
+\subsection{Variation of Theory and Basis Set Usage by System Size and largest atom type}
 
 System will have inherent restrictions. Give an example of large system with simple atoms, small system with complex atoms.
 System estimates quantity and cost of calculations based on computational limits defined by user for various theory-basis set pairings. 
@@ -106,7 +109,7 @@ System optimizes calculations for the scale of run (is it the first broad-scope 
 
 Good to have: data on how theory and basis set alter computational requirement. Available in literature? Create data from runs?
 
-\subsubsection{Computational Optimization by Varying Resolution}
+\subsection{Computational Optimization by Varying Resolution}
 
 Extant work not optimized for a general search (negative claim: make sure literature has nothing). 
 Design should work with additional development (primary focus this semester) as a general search tool. 
@@ -114,7 +117,7 @@ Design should work with additional development (primary focus this semester) as 
 
 \subsection{Inherent Complications}
 
-Complications of size and atom type, impossible conformations, duplications, limited computational resources, GERMANIUM.
+Complications of size and atom type, impossible conformers, duplications, limited computational resources.
 
 \section{Results}
 
