@@ -1,11 +1,6 @@
 \chapter{On Algorithms for Building and Sampling Disordered Crystal States}
 \label{ch:iceXI}
 
-% Introduction
-	 % Literature Review
-% Experiment setup and result
-% Future/Ongoing Work (maybe disclude)
-
 \section{States and Properties of Ice}
 
 Ice is cool. 
@@ -36,11 +31,17 @@ Do other characteristics come into play??????? %FIND OUT
 As the most commonly found form on earth, ice I$_{h}$ is a highly desired form for computational studies involving ice systems. 
 %structure
 %P/T deets
+As an interesting specificity, ice I$_{h}$ does not cover any proton-disordered crystal with the same oxygen spatial positioning. 
+Rather, it holds a specific unit cell defined in 
+% FIND
+(source?).
+% FIND
+
+
 
 \subsection{Efforts to Generate Ice I$_{h}$}
 
-Has anyone else published efforts to generate Ice I$_{h}$?
-I'm sure someone has.
+Cover \cite{MCIce} work here and additional discoveries.
 
 
 \subsection{Comparison between Ice XI and Ice I$_{h}$}
@@ -62,14 +63,15 @@ In generating the crystal, the cause of these defects must be considered and cou
 
 % overview
 % 0. get pdb ice xi DONE
-% 1. read in pdb ice xi
-% 2. identify molecules (H2O)
-% 3. identify molecule neighbors
-% 4. identify corners/edges (in progress)
-% 5. for each molecule, identify the tetrahedral spaces
-% 6. for each molecule, "randomly" place the two protons
-% 7. Check hydrogen bond defect rate
-% 8. Fix as necessary (in progress)
+% 1. read in pdb ice xi DONE
+% 2. identify molecules (H2O) DONE 
+% 3. identify molecule neighbors DONE
+% 4. identify corners/edges (in progress) DONE
+% 5. for each molecule, identify the tetrahedral spaces DONE
+% 6. for each molecule, "randomly" place the two protons DONE
+% 7. Check hydrogen bond defect rate DONE
+% 8. Fix as necessary (in progress) DONE
+% 9. Compare to existing work
 
 \subsection{Overview}
 
@@ -161,9 +163,6 @@ For example, a threshold of 2.5 will allow a maximum of 3 defects on any given m
 Because each of these defects will be counted twice, once for each molecule, the total number of defects in a crystal can be determined by multiplying the average defect value by the number of molecules and dividing by two.
 As of the current implementation, the method cannot reliably produce a crystal with a threshold below 2 as it will continue to search until the system runs out of available memory and crash without recording any new structure.
 
-
-
-
 \section{Results of Method}
 
 When supplied with an input ice XI crystal, an output structure with rotated water molecule orientations strictly consistent with ice Ih describes a success at the most basic level.
@@ -191,20 +190,32 @@ An example before and after of the method is given in figures \ref{fig:iceXI} an
 	
 \end{figure}
 % FIX BELOW
-The generated ice Ih has been rotated.
-% FIX ABOVE
+As can be seen, the "after" image has experienced rotation and can no longer be classified as ice XI. 
+However, as ice I$_{h}$ also has a standard shape, the generated crystal can not be considered ice I$_{h}$.
+Instead, it can be considered a proton-disordered orthorhombic ice crystal similar to ice I$_{h}$. 
+
+Unfortunately, the result is not without defect.
 When following the subsequent layers in the crystal, patterns emerge. 
 Inconsistently, some rows of waters remain consistent.
 Some of these are a uniform rotation of both hydrogen atoms, while others are just one consistently placed hydrogen atom.
 Multiple trials yield internally unique results, yet all contain these strange consistencies.
 This may be due to some accidental pattern in the method's implementation.
 
-
+% FINISH
+%
+%
+%
+%
 \section{Comparison with Other Methods}
 % USE BUTH PAPER
+Currently in progress, this section will primarily compare the results of this method with \cite{MCIce}.
 \subsection{benefits of own method over others}
 \subsection{benefits of other methods over this}
-
+%
+%
+%
+%
+% FINISH
 
 
 \section{Comments on Limitations and Proposed Improvements}
@@ -219,8 +230,9 @@ The neighboring four molecules are defined as level 2, and continued onward exce
 The number of defects in each level can be counted and averaged.
 Then a depressive factor along the lines of $\frac{1}{level}$ can be used to diminish the value of defects further away from the first-level molecule.
 This would create a value for each molecule that shows the relative density of defects centered about that specific molecule and could even be plotted as a gradient change within the crystal.
-The equation would be something like:
+The general approach to a scoring mechanism may take a form similar to equation \ref{eq:IceScoring}.
 \begin{equation}
+\label{eq:IceScoring}
 Value = \sum_{l=1}^{N_{levels}} \Big[\frac{1}{l} * \frac{1} {N_{molecules}} *\sum_{m=1}^{N_{molecules}}[N_{defects, m}]\Big]
 \end{equation}
 

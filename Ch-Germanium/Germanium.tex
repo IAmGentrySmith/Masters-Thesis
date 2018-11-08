@@ -3,16 +3,11 @@
 
 \section{Modeling Germanium Compounds}
 
-EACH SUBSECTION: DEFINITION OF TERMS
+% EACH SUBSECTION: DEFINITION OF TERMS
 
-This will be an interesting section as there is extremely little in terms of Ge computational work. Perhaps a broader search will yield interesting results. For sake of thoroughness, I will also include work on computational energy optimization in general and work through complications brought by the size of Ge. I might also include a portion on the statistical spread of conformations at a given temperature (internal energy?) I may include a sentence or paragraph on Gaussian-based publications. 
+A work in progress - not much research on Germanium exists.
 
-\subsection{Tools for Modeling Germanium}
-
-Computational Requirements and reasons for those requirements.
-
-Germanium is not the most-studied atom in computational works.
-The majority of Germanium studies are done with Gaussian (citation needed?).
+% This will be an interesting section as there is extremely little in terms of Ge computational work. Perhaps a broader search will yield interesting results. For sake of thoroughness, I will also include work on computational energy optimization in general and work through complications brought by the size of Ge. I might also include a portion on the statistical spread of conformations at a given temperature (internal energy?) I may include a sentence or paragraph on Gaussian-based publications. 
 
 \subsection{Computational Complexity of Germanium Compounds}
 
@@ -41,7 +36,7 @@ As detailed below, this work led to impossibilities, curiosities, and inconsiste
 
 The two subject germanium-based compounds are very similar: a germanium backbone with terminal isopropyl groups and internal phenyl rings. 
 One compound constituted a pentagermanium chain while the other a hexagermanium backbone. 
-The molecular formula for both is $Pr^{i}_{3}Ge(GePh_{2})_{n}GePr^{i}_{3}$ where n equals 3 for the pentagermane or 4 for the hexagermane compounds, respectively.
+The molecular formula for both is $Pr^{i}_{3}Ge(GePh_{2})_{n}GePr^{i}_{3}$ where n equals 3 for the pentagermanium or 4 for the hexagermanium compounds, respectively.
 An example image of both compounds in their fully-trans configurations are provided in figures \ref{fig:Ge5TransAll} and \ref{fig:Ge6TransAll}.
 
 \begin{figure}
@@ -70,7 +65,6 @@ An example image of both compounds in their fully-trans configurations are provi
 \begin{table}[]
 	
 	\centering
-	
 	\begin{tabular}{llll}
 		Conformation & Energy ($E_{h}$)    & $\Delta$ Energy ($E_{h}$) & $\Delta$ Energy ($\frac{KJ}{mol}$) \\ \cline{1-4} 
 		Trans-coplanar        & -15014.8403143 & 0.0066255            & 17.39525025                        \\
@@ -78,10 +72,7 @@ An example image of both compounds in their fully-trans configurations are provi
 		Trans-Cis-Trans       & -15014.8469398 & 0.0000000            & 0.0000000                                  \\
 		Cis-Trans-Trans       & -15014.8246918 & 0.0222480            & 58.412124                         
 	\end{tabular}
-	
-	\centering
-	
-	\caption{Collaborator's Hexagermane Energies by Conformation \\ (density functional theory, unknown basis set, energy in Hartrees and KJ/mol)}
+	\caption{Collaborator's Hexagermanium Energies by Conformation \\ (density functional theory, unknown basis set, energy in Hartrees and KJ/mol)}
 	
 	\label{tab:Ge6CollabEnergies}
 	
@@ -89,14 +80,9 @@ An example image of both compounds in their fully-trans configurations are provi
 Dr. Weinert had worked previously with an additional collaborator who provided conformation data supplied in table \ref{tab:Ge6CollabEnergies}.
 If I want to cite somebody, all I do is type in the citation for \cite{BFIceOG}.
 
-
 The approach of labeling the conformation shape of each compound, given the many points of torsion, focuses on the backbone structure. 
 As the raw data from the collaborator was not available, the general dihedral angles of cis and trans proved a vexing focus for initial efforts at conformer design.
-Using Newman projections like in figure 
-% MAKE NEWMAN PROJECTION
-REF!
-% MAKE NEWMAN PROJECTION
-as a visual guide, each Ge-Ge bond was defined as cis or trans based on the relative angle produced by the two  adjacent bonded Ge atoms to each subject Ge.
+Using Newman projections like in figure \ref{fig:Newman} as a visual guide, each Ge-Ge bond was defined as cis or trans based on the relative angle produced by the two  adjacent bonded Ge atoms to each subject Ge.
 Specifically, the bonds are marked cis if the most acute angle is 90$^{\circ}$ or fewer, and likewise trans if greater than 90$^{\circ}$ up to the maximum 180$^{\circ}$.
 Effectively the cis and trans angles coincide with gauche and anti in organic structure nomenclature.
 Terminal germanium atoms are not considered as a part of the conformation state. 
@@ -107,21 +93,29 @@ C$_{3}$
 symmetry of the terminal Ge with three isopropyl groups reducing the relative effects of terminal germanium rotation.
 Effectively, only dihedrals formed by four consecutive Ge are given a cis or trans label.
 
+\begin{figure}
+	
+	\centering
+	
+	\includegraphics[width=0.75\textwidth]{NewmanCis.png}
+	
+	\caption{Sample Newman projection of cis-butane.}
+	
+	\label{fig:Newman}
+	
+\end{figure}
+
 \subsection{Design and Approach to Solution}
 
 The initial approach involved an attempt at basic replication of the collaborative results.
-This design gradually became more complex as I
+As detailed below, the design gradually grew in complexity as a learning process. 
+Eventually, curiosities in results and a desire to automate an objective search algorithm developed into two unique investigations.
 
 \subsubsection{Design 1: Occam's Smallest Razer}
 
-With each non-terminal Ge-Ge dihedral initially labeled cis or trans for 0$^{\circ}$ or 180$^{\circ}$, about 3 unique pentagermane and 6 unique hexagermane structures were built visually on a 3D visualization program (Avogadro).
+With each non-terminal Ge-Ge dihedral initially labeled cis or trans for 0$^{\circ}$ or 180$^{\circ}$, about 3 unique pentagermanium and 6 unique hexagermanium structures were built visually on a 3D visualization program (Avogadro).
 These were rotated without consideration for the phenyl rings populating the non-terminal Ge atoms.
-Each molecule was subjected to an energy minimzation in Gaussian 09 with the B3LYP hybrid function and STO-3G basis set as a single particle in a vacuum at otherwise default settings. 
-See code in 
-% REFERENCE EARLY G09 CODE
-REF
-% REFERENCE EARLY G09 CODE
-for a sample job command file.
+Each molecule was subjected to an energy minimization in Gaussian 09 with the B3LYP hybrid function and STO-3G basis set as a single particle in a vacuum at otherwise default settings. 
 
 Unsurprisingly, only the fully trans conformers successfully converged (a 22\% success rate) into a stable form. 
 These troubles were likely caused by the poor design of the initial conformers. 
@@ -133,7 +127,7 @@ In the second iteration of the conformer design process, a greater number of bac
 Instead of the simple 180$^{\circ}$ opposition between the cis and trans conformers, more intentional initial angles seen in Newman projections were selected.
 Specifically, the anti and both gauche angles were chosen for the natural local minima in a non-bulky molecule, with both gauche angles (60 and 300) labeled as cis and the anti angle (180) as trans. 
 For initial conformer design, these backbone angles were limited to three positions: 60$^{\circ}$, 180$^{\circ}$, or 300$^{\circ}$.
-For the hexagermane compound, these structures were sequentially labeled trans-trans-trans, trans-trans-cis, trans-cis-trans, et cetera until all major unique conformers were produced.
+For the hexagermanium compound, these structures were sequentially labeled trans-trans-trans, trans-trans-cis, trans-cis-trans, et cetera until all major unique conformers were produced.
 For clarity, each conformer was identified by the dihedral angles (60-60-60, 60-60-180) in increasing order (Ge 1-2-3-4, Ge 2-3-4-5, Ge 3-4-5-6 dihedral).
 The phenyl rings on the non-terminal Ge atoms were left untouched from an initial steepest-descent minimization available from Avogadro ran in the fully trans conformer.
 
@@ -145,36 +139,106 @@ To further avoid backbone rotation restrictions, variations of the bulky molecul
 These included versions where the phenyl rings were replaced by methyl groups and also where the isopropyl ends were additionally replaced by methyl groups. 
 There intention in these designs were to observe the shift in relative energy between the sets of conformers to determine how significant of a role the phenyl rings and isopropyl groups played.
 These variations, along with the original form structures, were subject to the same calculations as in the first design: Gaussian 09, B3LYP hybrid functional, STO-3G basis set, no angle restrictions, single particle in a vacuum, otherwise default parameters.
-The results of these calculations are tabulated in table
-% REF TABLE
-REFNAME
-% REF TABLE 
+The results of these calculations are tabulated in tables \ref{tab:Ge5Ver2Data} and \ref{tab:Ge6Ver2Data}.
 
-% USELESS DATA PUT HEAYAH
+\begin{table}[]
+	\centering
+	\begin{tabular}{llllll}
+		\begin{tabular}[c]{@{}l@{}}Internal\\ Species\end{tabular} & \begin{tabular}[c]{@{}l@{}}Terminal\\ Species\end{tabular} & Conformer & \begin{tabular}[c]{@{}l@{}}Final Energy\\ (Hartrees)\end{tabular} & \begin{tabular}[c]{@{}l@{}}∂ Energy\\ (Hartrees)\end{tabular} & \begin{tabular}[c]{@{}l@{}}∂ Energy\\ (KJ/mol)\end{tabular} \\ \hline
+		methyl & methyl & 60-60 & -10738.91336 & 0.0000454 & 0.119 \\
+		methyl & methyl & 60-180 & -10738.9134 & 0 & 0 \\
+		methyl & methyl & 60-300 & -10738.91286 & 0.0005358 & 1.407 \\
+		methyl & methyl & 180-60 & -10738.91325 & 0.0001533 & 0.402 \\
+		methyl & methyl & 180-180 & -10738.91335 & 0.0000475 & 0.125 \\
+		methyl & methyl & 180-300 & -10738.91336 & 0.0000451 & 0.118 \\
+		methyl & methyl & 300-60 & -10738.91336 & 0.0000455 & 0.119 \\
+		methyl & methyl & 300-180 & -10738.91287 & 0.0005357 & 1.406 \\
+		methyl & methyl & 300-300 & -10738.9107 & 0.002703 & 7.097 \\ \hline
+		phenyl & methyl & 60-60 & -11875.15183 & 0.0001451 & 0.381 \\
+		phenyl & methyl & 60-180 & -11875.15144 & 0.0005304 & 1.393 \\
+		phenyl & methyl & 60-300 & -11875.15197 & 0 & 0 \\
+		phenyl & methyl & 180-60 & -11875.14282 & 0.0091505 & 24.025 \\
+		phenyl & methyl & 180-180 & -11875.15004 & 0.0019354 & 5.081 \\
+		phenyl & methyl & 180-300 & -11875.15064 & 0.0013353 & 3.506 \\
+		phenyl & methyl & 300-60 & -11875.06665 & 0.0853257 & 224.023 \\
+		phenyl & methyl & 300-180 & DNC & DNC & DNC \\
+		phenyl & methyl & 300-300 & -11875.1497 & 0.0022723 & 5.966 \\ \hline
+		phenyl & isopropyl & 60-60 & DNC & DNC & DNC \\
+		phenyl & isopropyl & 60-180 & -12341.23176 & 0.0053028 & 13.923 \\
+		phenyl & isopropyl & 60-300 & DNC & DNC & DNC \\
+		phenyl & isopropyl & 180-60 & DNC & DNC & DNC \\
+		phenyl & isopropyl & 180-180 & -12341.23513 & 0.001935 & 5.08 \\
+		phenyl & isopropyl & 180-300 & DNC & DNC & DNC \\
+		phenyl & isopropyl & 300-60 & DNC & DNC & DNC \\
+		phenyl & isopropyl & 300-180 & -12341.23706 & 0 & 0 \\
+		phenyl & isopropyl & 300-300 & DNC & DNC & DNC
+	\end{tabular}
+	\caption{Data of B2LYP/STO-3G minimization of variations of pentagermane compound at various conformers. DNC denotes a failure to converge with the self-consistent field method.}
+	\label{tab:Ge5Ver2Data}
+\end{table}
+
+\begin{table}[]
+	\centering
+	\begin{tabular}{llllll}
+		\begin{tabular}[c]{@{}l@{}}Internal\\ Species\end{tabular} & \begin{tabular}[c]{@{}l@{}}Terminal\\ Species\end{tabular} & Conformer & \begin{tabular}[c]{@{}l@{}}Final Energy\\ (Hartrees)\end{tabular} & \begin{tabular}[c]{@{}l@{}}∂ Energy\\ (Hartrees)\end{tabular} & \begin{tabular}[c]{@{}l@{}}∂ Energy\\ (KJ/mol)\end{tabular} \\ \hline
+		methyl & methyl & 60-60-60 & -12870.91834 & 0.0009503 & 2.495 \\
+		methyl & methyl & 60-180-60 & -12870.91929 & 0.0000004 & 0.001 \\
+		methyl & methyl & 60-180-180 & -12870.91813 & 0.0011628 & 3.053 \\
+		methyl & methyl & 60-180-300 & -12870.91869 & 0.0005972 & 1.568 \\
+		methyl & methyl & 60-300-300 & DNC & DNC & DNC \\
+		methyl & methyl & 180-60-60 & -12870.91897 & 0.0003189 & 0.837 \\
+		methyl & methyl & 180-180-60 & -12870.91833 & 0.0009585 & 2.517 \\
+		methyl & methyl & 180-180-180 & -12870.91929 & 0.0000004 & 0.001 \\
+		methyl & methyl & 180-180-300 & -12870.91929 & 0.0000003 & 0.001 \\
+		methyl & methyl & 180-300-60 & -12870.91897 & 0.0003192 & 0.838 \\
+		methyl & methyl & 300-60-180 & DNC & DNC & DNC \\
+		methyl & methyl & 300-180-60 & -12870.91929 & 0 & 0 \\
+		methyl & methyl & 300-180-180 & DNC & DNC & DNC \\
+		methyl & methyl & 300-180-300 & -12870.91814 & 0.0011527 & 3.026 \\ \hline
+		phenyl & methyl & 60-60-60 & DNC & DNC & DNC \\
+		phenyl & methyl & 60-60-180 & -14385.89674 & 0.0052183 & 13.701 \\
+		phenyl & methyl & 60-60-300 & -14385.89487 & 0.0070829 & 18.596 \\
+		phenyl & methyl & 60-180-60 & DNC & DNC & DNC \\
+		phenyl & methyl & 180-60-60 & DNC & DNC & DNC \\
+		phenyl & methyl & 180-60-180 & -14385.90195 & 0 & 0 \\
+		phenyl & methyl & 180-60-300 & -14385.89855 & 0.0033998 & 8.926 \\
+		phenyl & methyl & 180-180-180 & -14385.83838 & 0.0635763 & 166.92 \\
+		phenyl & methyl & 180-300-180 & -14385.79233 & 0.1096251 & 287.821 \\
+		phenyl & methyl & 300-60-60 & DNC & DNC & DNC \\
+		phenyl & methyl & 300-60-180 & -14385.89836 & 0.003597 & 9.444 \\
+		phenyl & methyl & 300-60-300 & -14385.89836 & 0.0035979 & 9.446 \\
+		phenyl & methyl & 300-180-60 & DNC & DNC & DNC \\
+		phenyl & methyl & 300-300-300 & DNC & DNC & DNC \\ \hline
+		phenyl & isopropyl & 60-180-180 & -14851.9865 & 0 & 0 \\
+		phenyl & isopropyl & 60-300-60 & DNC & DNC & DNC \\
+		phenyl & isopropyl & 60-300-180 & DNC & DNC & DNC \\
+		phenyl & isopropyl & 180-300-60 & DNC & DNC & DNC \\
+		phenyl & isopropyl & 180-300-180 & DNC & DNC & DNC \\
+		phenyl & isopropyl & 180-300-300 & DNC & DNC & DNC \\
+		phenyl & isopropyl & 300-300-60 & DNC & DNC & DNC \\
+		phenyl & isopropyl & 300-300-180 & DNC & DNC & DNC \\
+		phenyl & isopropyl & 300-300-300 & DNC & DNC & DNC
+	\end{tabular}
+	\caption{Data of B2LYP/STO-3G minimization of variations of hexagermane compound at various conformers. DNC denotes a failure to converge with the self-consistent field method.}
+	\label{tab:Ge6Ver2Data}
+\end{table}
+
 
 Immediately obvious in the table are the considerable number of nonconverged results. 
 An unexpected bulkiness trend followed that a fully methylated variation of the structure was most likely to converge to a stable state, while the fully internal phenyl structures with methyl ends slightly reduced convergence and the original fully internal phenyl structures with isopropyl ends drastically reduced convergence.
-The common-sense expectation that the addition of the phenyl ends would reduce stability was not realized in these results. 
+The common-sense expectation that the addition of the phenyl ends would reduce stability was not parroted in these results. 
 A deeper exploration into the change of stability is a promising avenue for future investigation, but was not further explored in this work.
-As
-% IS IT HIGHLIGHTED???
-higlighted
-% IS IT???
-in table 
-%
-REF,
-%
-the lowest energy conformer for each structure form varied greatly, but never included the fully trans conformer and only once the collaborator-reported trans-cis-trans conformer as the most stable.
+As can be seen in table \ref{tab:Ge6Ver2Data}, the lowest energy conformer for each structure varied greatly, but never included the fully trans conformer and only once the collaborator-reported trans-cis-trans conformer as the most stable.
 Still, given the considerable amount of nonconverged conformers, a new design was necessary to further improve the scope of the lowest energy conformation search.
 
 \subsubsection{Design 3: Death by 1.59 Million Cuts}
 
 In the final version of the conformer generation effort, additional creation efforts were focused on the individual phenyl rings. 
-The unfavorable interactions between the phenyl rings were considerable hurdle in the previous designs and a potential explanation for the large number of nonconverged structures, including the possibility that the terminal isopropyl hexagermane structures contained particularly unfavorable interactions among the phenyl rings.
+The unfavorable interactions between the phenyl rings were considerable hurdle in the previous designs and a potential explanation for the large number of nonconverged structures, including the possibility that the terminal isopropyl hexagermanium structures contained particularly unfavorable interactions among the phenyl rings.
 This third design sought to remove the uncertainty in phenyl ring bulkiness by applying the same approach as the backbone generation: create unique conformers of every backbone torsion and phenyl ring, limiting each torsion to one of three rotational positions following the Newman projection style. 
 Unfortunately, this task proved prohibitively large.
 
-As an explanation for the insurmountability of the problem, consider the hexagermane structure. 
+As an explanation for the insurmountability of the problem, consider the hexagermanium structure. 
 The germanium dihedrals represent three rotatable bonds each with three initial positions. 
 To include the phenyl rings would require the inclusion of eight new rotatable bonds each with three initial positions.
 Additionally, considering each terminal germanium's rotation while ignoring each isopropyl's rotatable bonds adds two initial positions each with three initial positions. 
@@ -203,15 +267,23 @@ This would produce a series of calculation sets with additive computational requ
 The natural next question lies within the reliability of basis sets and functional theories. 
 It naturally follows that a less-accurate method should not be relied on while better methods exist. 
 However, considering the scale of the conformer pool, it follows that a less accurate method would still produce energy values with a roughly similar internal consistency. 
-For example, a 180-0-180 form of the hexagermane compound with parallel phenyl rings as modeled in figure
-% FIGURE
-REF
-% FIGURE
-will have intense syn interactions between some phenyl rings and will likely not yield a desirable energy value at any level of calculation while a fully trans form with perfect pi stacking phenyl rings will likely have a lower energy value at all levels of calculation.
+For example, a 180-0-180 form of the hexagermanium compound with parallel phenyl rings as modeled in figure \ref{fig:6geTCT} will have intense syn interactions between some phenyl rings and will likely not yield a desirable energy value at any level of calculation while a fully trans form with perfect pi stacking phenyl rings will likely have a lower energy value at all levels of calculation.
 It follows that, at lower levels of accuracy, the extremely high energy conformers can be pruned from the pool early and drastically reduce overall computational requirements.
 A generic effort at producing a method in this style is detailed in chapter \ref{ch:ConformationLandscape}, while the remainder of this chapter details additional efforts of calculating these germanium compounds.
 
-\subsection{Attempts at Simplification}
+\begin{figure}
+	
+	\centering
+	
+	\includegraphics[width=0.75\textwidth]{placeholder.png}
+	
+	\caption{Visualization of a trans-cis-trans hexagermane structure.}
+	
+	\label{fig:6geTCT}
+	
+\end{figure}
+
+\subsection{Efforts at Simplification}
 
 One potential avenue of simplifying the process is computing the energy minimizations of lower-period atoms (e.g. a carbon backbone instead of germanium) and then applying a correction factor for a net reduction in computation time.
 As a period 4 element, germanium exhibits computational qualities similar to but more complicated than both carbon and silicon.
@@ -219,18 +291,79 @@ Using tested samples, an energy minimization of a carbon-backbone molecule inste
 Assuming a nominal correction factor exists and can be applied, this represents an order of magnitude reduction in computation time with one simplification. 
 Potentially, this would allow investigators to much more quickly eliminate high energy conformers and more rapidly reduce the scope of the search.
 
-The approach to acquiring sufficient data for a possible correction factor involved running an extremely simplified form of the germanium compounds, specifically a butagermane backbone with hydrogens occupying all terminal and internal bonds.
+The approach to acquiring sufficient data for a possible correction factor involved running an extremely simplified form of the germanium compounds, specifically a butagermanium backbone with hydrogens occupying all terminal and internal bonds.
 This reduced the complication and complexity of bulkiness and allowed for quick full torsion rotations about the single Ge-Ge-Ge-Ge dihedral.
 By operating at intervals of 5$^{\circ}$, a full torsion drive provides a glimpse at relative energies of the molecule at 72 discrete states. 
-Then, once multiple torsion drives had completed in multiple group four elements (isobutyl C, Si, and Ge were all built and tested), the energies could be compared and analyzed for any relative or absolute scaling at the additive or multiplicative reference. 
+An example plot of this torsion drive is shown in figure \ref{fig:EXTorsion} Once multiple torsion drives had completed in multiple group four elements (isobutyl C, Si, and Ge were all built and tested), the energies could be compared and analyzed for any relative or absolute scaling at the additive or multiplicative reference. 
+%MORE
+
+\begin{figure}
+	
+	\centering
+	
+	\includegraphics[width=0.75\textwidth]{placeholder.png}
+	
+	\caption{Visualization of a multiple pure group IV torsions at various theories and basis sets}
+	
+	\label{fig:EXTorsion}
+	
+\end{figure}
 
 For a full comparative set, 3456 points of analyzed data were generated for each reference molecule's free energy in comparison with the others. 
 Unsurprisingly, no simple correction factor arose by method of a simple additive or multiplicative term applied toward all torsion points. 
+A visual trend arose with these drives, where curios results arose.
+%
+%newmanproject-esque expected energies. no surprise! add pictures! include
+%
 A future avenue of research would be to further explore this with depressive or polynomial terms to discover whether a simple corrective function might exist with specific molecules.
 
-\subsection{Discovery of Program Flaw}
+While the comparisons between different group 4 elements did not yield positive results, a similar approach with differing functionals and basis sets was also attempted. 
+While this approach likewise did not find any simple correction factor, a graphical representation of multiple functionals across the isobutyl C, Si, and Ge show an interesting trend, as visualized by a graph provided by Dr. Christopher Fennell and shown in figure \ref{fig:FennellTorsion}
 
-%asdf
+\begin{figure}
+	
+	\centering
+	
+	\includegraphics[width=0.75\textwidth]{placeholder.png}
+	
+	\caption{Visualization of a multiple pure group IV torsions at various theories and basis sets}
+	
+	\label{fig:FennellTorsion}
+	
+\end{figure}
+
+As expected by different types of calculations, the torsion graphs hold different internal relative energies. 
+For carbon, all four functionals produced a clean curve. 
+The AM1 and PM3 functionals produced unexpected results for both Si and Ge graphs. 
+In each, the expected highest energy 0$^{\circ}$ torsion angle was instead the most favorable of the three eclipsed angles.
+Additionally, the Si PM3 and the Ge AM1 and PM3 functionals showed strong spikes along the expectedly smooth curve, with the Ge PM3 being noticeably broken.
+% MAKE SURE THIS IS CORRECT
+These are likely due to the additional electronic interactions from the additional electron shells of Si and also the d-orbital electrons in Ge.
+% MAKE SURE THIS IS CORRECT
+While the Si graphs smoothed out for the B3LYP and HF functionals at STO-3G basis set, the Ge B3LYP showed significant spikes and only the HF STO-3G exhibited a smooth curve.
+Effectively, this discovery of spikes along torsion drives led to the realization that the validity of a basis set could possibly be determined by the smoothness of a torsion drive.
+For example, any calculation of a germanium-containing molecule will likely not produce reliable results with a B3LYP hybrid functional and STO-3G basis set, while the Hartree Fock STO-3G calculation would at least be tentatively reliable for comparative energy levels at various conformations.
+
+The next natural step was to calculate and plot additional functional theories and basis sets with the isobutagermanium chain. 
+While effectively a lightly guided meandering through the available calculation types, the first effort was to observe relative differences across multiple basis sets of the Hartree Fock theory and to examine the relative computational requirements of each.
+This plan was quickly redirected, however, when a curiosity within the data was revealed.
+
+\subsection{Discovery of a Consistent Inconsistency}
+
+The extended round of torsion drive calculations included an alteration in representation of the data.
+As the focus had shifted from relative energies and intensities across multiple theories and basis sets to a focus on graph smoothness and internal relative energies, the energy axis of plots were reduced to a unitless scale ranging 0 to 1, where 0 represents the minimum energy and 1 represents the maximum energy in a given set of torsion drive data.
+This allowed for graphical representations of each torsion drive to emphasize the internal variation of torsions relative to the minimum and maximum values.
+This was accomplished by taking any set of data with absolute scale energy unit, identifying the minimum and maximum values, and scaling each data point according to equation \ref{eq:TorsionReducedScale}. 
+The script to collect and scale data points is detailed in \ref{ch:App:Germane}.
+
+\begin{equation}
+% NEEDS SOME WORK
+E_{i, red} = \frac{E_{i,abs} - E_{min,abs}}{E_{max,abs}-E_{min,abs}}
+\label{eq:TorsionReducedScale}
+% NEEDS SOME WORK
+\end{equation}
+
+Need more: Actually finding the Ge problem, and confirming it.
 
 
 

@@ -11,36 +11,9 @@ For ROUGHLY forty years, computational programs have allowed investigators to mo
 
 \subsubsection{Levinthal's Paradox}
 
-Discuss history of Levinthal and his paradox. Provide the non-paradoxical solution.
+Discuss history of Levinthal and his paradox. Provide the non-paradoxical solution. 
 
 Next: Levinthal golf courses by Ken Dill.
-
-\subsection{Computational Modeling}
-
-Introduce importance and impact. Bigly important.
-
-\subsubsection{History of Chemical Modeling}
-
-Here I will introduce molecular modeling. This will begin with a brief history of the development of the field. It will continue through to mention the styles and goals of molecular modeling. Upon reaching modern techniques, I will discuss the benefits and costs associated with the major types of calculations (QM, MD, MC, etc). 
-
-\subsubsection{Hardware: Oklahoma State University's Cowboy Cluster}
-
-It would also be appropriate to mention the computational capabilities of OSU's Cowboy cluster.
-
-\subsubsection{Software}
-
-Software to mention: 
-
-Visualization{Avogadro, UCSF Chimera}
-
-Computing{GAMESS, Gaussian, NWChem, Octopus}
-
-This also includes brief pros and cons about the programs and the general purpose of use in case.
-
-\subsubsection{Programming Languages}
-
-Another hugely important portion of this will include a choice in the programming languages used (mostly python (Cython-compiled!), some Perl and Bash).
-
 \subsection{Literature Review on Relevant Works}
 
 
@@ -66,16 +39,16 @@ Selection of lowest-energy optimization organized on dihedral values.
 Quick determination of importance of dihedral based on how heavily it impacts internal energy. 
 Splitting "best" dihedral into smaller interval to repeat the process. 
 
-This method produces an interesting visual plot with varying resolution at different X values (if plotting energy vs. dihedral).
-Example given in figure \ref{fig:variableResolutionSample}.
+This method produces an interesting multilayered visual plot with a zooming effect toward the lowest energy conformer.
+An example of how this might look for a two-dihedral molecule is given in figure \ref{fig:variableResolutionSample}.
 
 \begin{figure}
 	
 	\centering
 	
-	\includegraphics[width=0.75\textwidth]{placeholder.png}
+	\includegraphics[width=0.75\textwidth]{VRSGraphEX.jpeg}
 	
-	\caption{example VR chart (exploding like molecule/cell/fiber/muscle)}
+	\caption{example VR chart (hand-drafted, CGI pending)}
 	
 	\label{fig:variableResolutionSample}
 		
@@ -85,19 +58,17 @@ Example given in figure \ref{fig:variableResolutionSample}.
 
 System designed in Python for ease of development and compiled via Cython for computational efficiency. 
 Utilizes Gaussian and UCSF Chimera, but can be redesigned for any computational programs that accomplish the desired tasks.
-Overview of system flow given in figure \ref{fig:VRSDesign}.
+An overview of system flow given in figure \ref{fig:VRSDesign}.
+
 
 \begin{figure}
-	
-	\centering
-	
-	\includegraphics[width=0.75\textwidth]{placeholder.png}
-	
-	\caption{Flow of method design for variable resolution conformation landscape search.}
-	
-	\label{fig:VRSDesign}
-	
+	\centering 
+ 		\makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{AlgFlow.png}}
+		\caption{Flow of method design for variable resolution conformation landscape search.}
+		\label{fig:VRSDesign}
+
 \end{figure}
+
 
 This design, with implementation being a current work in progress, but should{\texttrademark} work as a cascade toward the lowest energy conformer in each case.
 
@@ -107,7 +78,7 @@ System will have inherent restrictions. Give an example of large system with sim
 System estimates quantity and cost of calculations based on computational limits defined by user for various theory-basis set pairings. 
 System optimizes calculations for the scale of run (is it the first broad-scope search, or a final near-exact search).
 
-Good to have: data on how theory and basis set alter computational requirement. Available in literature? Create data from runs?
+% Good to have: data on how theory and basis set alter computational requirement. Available in literature? Create data from runs?
 
 \subsection{Computational Optimization by Varying Resolution}
 

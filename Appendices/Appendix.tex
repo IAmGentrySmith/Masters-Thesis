@@ -3,19 +3,68 @@
 
 Listed below is the source code utilized in the conversion of a PDB Ice Ih structure into an Ice XI structure. This code is functional in a Python 2.7 environment with NumPy and SciPy packages included.
 
-\section{Code: PDBDisorganize.py}
+\section{Code: Crystal Disorganizer Tool}
 \lstinputlisting[language=Python,breaklines=true]{codes/PDBDisorganize.py}
+
+
+\chapter{Two-Dimensional Rose-Potential Water}
+\label{ch:App:2DWater}
+
+Below is the python script used to adjust the Rose-Potential system for various interfaces.
+
+\section{Code: Surface Adjustment Tool}
+This tool was created to adjust surface information in a given system.
+\lstinputlisting[language=Python,breaklines=true]{codes/oopseSurfaceMaker.py}
+
+% This is monstrous - unreasonable to include
+% \section{Surface Visualization Tool}
+% This tool was provided by Dr. Fennell to convert the completed OOPSE run into povre files to be converted into images or gifs.
+% \lstinputlisting[language=Perl,breaklines=true]{codes/surfaceRose2pov.pl}
+
+
+\chapter{Germanium Landscape}
+\label{ch:App:Germane}
+
+\section{Sample Gaussian 09 Germanium File}
+\label{SampleGeRunFile}
+Command files like the one below were built using Dr. Fennell's Gaussian 09 run builder script and proved very effective in producing command files.
+\lstinputlisting[breaklines=true]{codes/6geSample.cmd}
+
+\section{Building Group 4 Chains}
+
+While briefly mentioned and the subject of research for some time, the butyl-IV chain builder is detailed below. 
+Ultimately unsuccessful in the initial trials, these scripts may serve a purpose in further work.
+
+This first script builds a parent set of all possible C, Si, and Ge butylalkyl chains.
+
+\lstinputlisting[language=Python,breaklines=true]{codes/grp4builder.py}
+
+This second script takes the original trans-all butyl chain and enumerates 72 torsional rotations into a folder.
+
+\lstinputlisting[language=Python,breaklines=true]{codes/ChimeraRot.py}
+
+\section{Collecting and Comparing Torsional Data}
+
+These two scripts were utilized to reduce the output data into an energy value with normalized intensity from 0 to 1. The third script compares two of these files and looks for any additive or multiplicative trend.
+
+This first file reads energy data and creates a list of absolute energy values per torsion degree.
+\lstinputlisting[language=Python,breaklines=true]{codes/4gepullStatPDBs.py}
+
+This second file converts the first file into a relative scale from 0 to 1.
+\lstinputlisting[language=Python,breaklines=true]{codes/4getreatAbsEnergies.py}
+
+This third script compares two generated files using the prior scripts. It can compare the generated absolute energy with the relative energy files. It was often run as a loop through every permutation of the group 4 builder.
+
+\lstinputlisting[language=Python,breaklines=true]{codes/compEnerData.py}
+
 
 \chapter{Conformation Landscapes}
 \label{ch:App:ConfLand}
 
-
-\chapter{Germanium Landscape}
-\label{ch:App:GermLand}
-
 Listed below are two example Germanium PDB files. The first is for the end-goal hexagermane in the trans-trans-trans conformation with isopropyl groups on the terminal Ge atoms. The second is for the simplified butagermane with fully protonated Germanium atoms.
 
 \section{Code: hexagermane-transall.pdb}
+
 \lstinputlisting[breaklines=true]{codes/hexagermane-transall.pdb}
 
 The above molecule contains 154 atoms and 153 bonds, making it extremely computationally expensive for regular QM calculations. This made utilizing the large molecule as a trial system unreasonable due to the prohibitively long computation time for each conformation, assuming the conformation calculation would complete at all.
@@ -23,9 +72,11 @@ The above molecule contains 154 atoms and 153 bonds, making it extremely computa
 The below PDB file is the simplified butagermane with fully protonated Germanium atoms. As a significantly smaller system with only 14 atoms and 13 bonds, the relatively short computation time allowed the trial system to move with relative ease.
 
 \section{Code: ge4h.pdb}
+
 \lstinputlisting[breaklines=true]{codes/ge4h.pdb}
 
-\chapter{Two-Dimensional Rose-Potential Water}
+\section{Progress on Torsion Minimizer System}
 
-words
+While incomplete and largely nonfunctioning, this code is the current progress toward the implementation of the torsion minimizer system as outlined in \ref{fig:VRSDesign}.
 
+\lstinputlisting[language=Python,breaklines=true]{codes/DTM/Runner.py}
