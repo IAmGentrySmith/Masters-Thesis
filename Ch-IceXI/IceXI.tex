@@ -3,45 +3,42 @@
 
 \section{States and Properties of Ice}
 
-Ice is cool. 
-Ice has many forms, each with unique environments and structures that give rise to similar and unique properties. 
+Ice has many forms, each with unique environments and structures that give rise to similar and distinct properties. 
 
 \subsection{Bernal-Fowler Ice Rules}
 
-Bernal-Fowler Ice Rules are the basic rules for how water molecules interact in an ice structure.
-DETAILS ON BF PAPER
-
-Basically, water's tetrahedral structure allows for four interactions on each molecule. 
+Based on their paper published in 1933, the Bernal-Fowler Ice Rules are the foundational observations of how water molecules interact in an ice structure and have remained the standard for ice bonding rules for nearly a century.
+Essentially, water's tetrahedral structure allows for four interactions on each molecule. 
 The two protons allow for a hydrogen bond with a lone pair from a neighboring oxygen atom.
 Similarly, the oxygen atom's two lone pairs allow for a hydrogen bond with a neighboring proton. 
 These rules are fairly rigid in the sense that every water molecule can interact with two oxygen atoms and two protons from four surrounding water molecules.
-These are also free-form in the sense that each of the four attached water molecules can occupy one of three rotational microstates, allowing for 81 possible configurations (including rotational duplicates).
+These are also relatively relaxed in the sense that each of the four attached water molecules can occupy one of three rotational positions, allowing for 81 possible microstates when including rotational duplicates.
 
 \subsection{Forms of Ice}
 
 While ubiquitous in the 'I$_{h}$' form, ice water has many known forms.
 As of the writing of this work, there are 17 established forms of ice. 
 These forms usually occur in cubic, hexagonal, and orthorhombic crystal structures.
-The relationship between external pressure and temperature are the primary defining characteristics of which form will form in a given system. 
-Do other characteristics come into play??????? %FIND OUT
-
+The relationship between external pressure and temperature are the primary defining characteristics of which form will form in a given system, although doping may be required to produce some structures.
+The subject of this work will be on the proton-ordered orthorhombic ice XI and its proton-disordered isomer, ice I$_{h}$.
 
 \subsection{Ice I$_{h}$}
 
-As the most commonly found form on earth, ice I$_{h}$ is a highly desired form for computational studies involving ice systems. 
-%structure
-%P/T deets
-As an interesting specificity, ice I$_{h}$ does not cover any proton-disordered crystal with the same oxygen spatial positioning. 
-Rather, it holds a specific unit cell defined in 
-% FIND
-(source?).
-% FIND
+Ice I$_{h}$ naturally forms in pure solution at temperatures in the 72 K to 273.15 K range at at pressures in the 1 Pa to 100 MPa range, with some temperature curving off into the vapour and liquid phases at very high and very low pressures.
+As the most commonly found form on earth, ice I$_{h}$ is a highly desired form for computational studies involving ice systems for investigators investigating ice simulations in normal earth conditions.
 
+As famously discussed by Linus Pauling, hexagonal ice water contains a residual entropy at very low temperatures.\cite{PaulingIce} 
+This residual entropy goes according to Boltzmann's entropy equation $K=Ln(W)$ where $W=(\frac{3}{2})^{N}$ for N molecules in the crystal.
+He additionally predicted that a ice may exist at sufficiently low temperatures with zero entropy.
+%P/T deets
+% As an interesting specificity, the ice I$_{h}$ structure does not include any proton-disordered crystal with the same oxygen spatial positioning. % NEED SOURCE BEFORE INCLUDING
 
 
 \subsection{Efforts to Generate Ice I$_{h}$}
 
-Cover \cite{MCIce} work here and additional discoveries.
+
+The most commonly cited effort to create an ice I$_{h}$ crystal comes from \cite{MCIce}. 
+Her work involved a monte carlo effort to generate ice I$_{h}$ by initializing a deprotonated oxygen structure, randomly placing the appropriate number of protons, and then using MC methods to adjust the structure until every oxygen atom was bonded to exactly two hydrogen bonds.
 
 
 \subsection{Comparison between Ice XI and Ice I$_{h}$}
@@ -51,6 +48,7 @@ The ease of generation of an ice XI structure stems from the repetition of a uni
 
 
 With ice I$_{h}$ crystals, the proton-disordered form introduces entropy by way of rotational disorder. 
+The disordered protons allow for a greater number of microstates in the organization of the crystal, increasing the multiplicity and, by its very definition, entropy.
 As the protons and lone pairs are no longer consistently ordered, hydrogen bonds may no longer form properly at all interaction sites. 
 The interaction of proton with proton or lone pair with lone pair are not hydrogen bonds and are considered defects in the lattice. 
 An ice structure of randomly oriented molecules without consideration of hydrogen bonds will likely produce defects at many interaction sites across the lattice and weaken the integrity of the system, leading to stability problems while running simulations. 
@@ -75,9 +73,9 @@ In generating the crystal, the cause of these defects must be considered and cou
 
 \subsection{Overview}
 
-The big idea is to convert an easy-to-make ice XI crystal into an ice Ih crystal.
-Because the key difference in structure is the proton-orderedness, it might be possible to rearrange the water molecule orientations in a pseudorandom way to create an ice Ih crystal.
-This section walks through the method developed to convert ice XI into ice Ih, the results of initial testing, and imperfections discovered in the design.
+The big idea is to convert an easy-to-make ice XI crystal into an ice I$_{h}$ crystal.
+Because the key difference in structure is the proton-orderedness, it might be possible to rearrange the water molecule orientations in a pseudorandom way to create an ice I$_{h}$ crystal.
+This section walks through the method developed to convert ice XI into ice I$_{h}$, the results of initial testing, and imperfections discovered in the design.
 
 \subsection{Selection of Software Tools}
 
@@ -114,8 +112,8 @@ Once these closest neighboring oxygen atoms have been discovered, the appropriat
 
 \subsection{Defining Tetrahedral Positions}
 
-An important aspect of pseudorandom selection is the existence of a bank of options. % REWRITE
-Using the ingestion portion to calculate and store all tetrahedral possibilities proves useful.
+An important aspect of pseudorandom selection is the existence of a bank of options.
+Utilizing the ingestion portion of the tool to calculate and store all tetrahedral possibilities proves effective for tracking position options.
 For each water molecule, the first two tetrahedral positions are known by the positions of the two hydrogen atoms. 
 The other two positions are found by rotating one hydrogen atom 120$^{\circ}$ twice about the vector from the oxygen atom through the other hydrogen atom and storing the resulting positions as tetrahedral positions three and four. 
 
@@ -123,8 +121,8 @@ This does not produce an exactly correct tetrahedral position of potential hydro
 % EXACTLY HOW DIFFERENT? 
 % WHAT SPECIFIC FORCES?
 Fortunately, this difference is sufficiently small for visualization programs like Avogadro to still recognize hydrogen bonds between a rotated hydrogen atom and corresponding neighboring lone pair. 
-Currently, the method relies on a very soft annealing process by a simulation package to minimize the effect of this hydrogen bond imperfection. 
-% TALKING OUT YOUR ASS. FIND A SOLUTION
+Currently, the method does not correct for these minor angle variations and relies on the user to anneal the crystal by way of simulation to fully adjust the angles. 
+% FIND A SOLUTION
 Future versions of this method may account for the variations.
 
 \subsection{Pseudorandom Rearrangement of Water Molecules}
@@ -161,11 +159,11 @@ The current solution is to recursively check for and fix these impossible intera
 The current design of the method allows for the user to specify a threshold of defects as an average per molecule. 
 For example, a threshold of 2.5 will allow a maximum of 3 defects on any given molecule and will continue to correct defects until the average number of defects per molecule is equal to or below 2.5.
 Because each of these defects will be counted twice, once for each molecule, the total number of defects in a crystal can be determined by multiplying the average defect value by the number of molecules and dividing by two.
-As of the current implementation, the method cannot reliably produce a crystal with a threshold below 2 as it will continue to search until the system runs out of available memory and crash without recording any new structure.
+As of the current implementation, the method cannot reliably produce a crystal with a threshold below 2 as it will continue to recursively search until the system runs out of available memory and crashes without finalizing the structure.
 
 \section{Results of Method}
 
-When supplied with an input ice XI crystal, an output structure with rotated water molecule orientations strictly consistent with ice Ih describes a success at the most basic level.
+When supplied with an input ice XI crystal, an output structure with rotated water molecule orientations strictly consistent with ice I$_{h}$ describes a success at the most basic level.
 An example before and after of the method is given in figures \ref{fig:iceXI} and \ref{fig:iceIh}.
 \begin{figure}
 	
@@ -184,12 +182,11 @@ An example before and after of the method is given in figures \ref{fig:iceXI} an
 	
 	\includegraphics[width=0.75\textwidth]{iceIh.png}
 	
-	\caption{"After" image of generated ice Ih}
+	\caption{"After" image of generated ice I$_{h}$}
 	
 	\label{fig:iceIh}
 	
 \end{figure}
-% FIX BELOW
 As can be seen, the "after" image has experienced rotation and can no longer be classified as ice XI. 
 However, as ice I$_{h}$ also has a standard shape, the generated crystal can not be considered ice I$_{h}$.
 Instead, it can be considered a proton-disordered orthorhombic ice crystal similar to ice I$_{h}$. 
@@ -222,7 +219,7 @@ Currently in progress, this section will primarily compare the results of this m
 
 During the hydrogen bond defect correction step, a weakness in the design is that any clustering or regions of high defect density will not be noticed.
 This allows the existence of a highly-defective region within the larger structure that could potentially cause problems when the crystal is used in simulations. 
-The prevalence and occurrence of these defects have not been studied, but seem a natural inevitability of statistics. 
+The prevalence and occurrence of these defects have not been studied in this work, but seem a natural inevitability of statistics. 
 % SHOW THE STATS
 A potential solution with partial development will score regions based on the number of defects as a weighted function expanding out from a central molecule for N connections. 
 For example, consider a given molecule defined as level 1. 
@@ -236,7 +233,7 @@ The general approach to a scoring mechanism may take a form similar to equation 
 Value = \sum_{l=1}^{N_{levels}} \Big[\frac{1}{l} * \frac{1} {N_{molecules}} *\sum_{m=1}^{N_{molecules}}[N_{defects, m}]\Big]
 \end{equation}
 
-
+%final thoughts?
 
 
 

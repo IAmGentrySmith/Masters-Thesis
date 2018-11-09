@@ -3,27 +3,19 @@
 
 \section{Modeling Germanium Compounds}
 
-% EACH SUBSECTION: DEFINITION OF TERMS
-
-A work in progress - not much research on Germanium exists.
+While primarily used in optical applications including fiber optic cables and solar cell systems, germanium-based compounds are also used as polymerization catalysts.
+Relative to many other elements on the periodic table, computational reports on germanium are not common.
+Recent works have shown germanium's potential to polarize light.
 
 % This will be an interesting section as there is extremely little in terms of Ge computational work. Perhaps a broader search will yield interesting results. For sake of thoroughness, I will also include work on computational energy optimization in general and work through complications brought by the size of Ge. I might also include a portion on the statistical spread of conformations at a given temperature (internal energy?) I may include a sentence or paragraph on Gaussian-based publications. 
 
 \subsection{Computational Complexity of Germanium Compounds}
 
-Draw-backs of modeling Germanium. Uncommon but still necessary for wetwork.
-
-\subsection{Literature Review on Relevant Works}
-
-Make note of various Germanium modeling research. Make note of tools and methods used.
-
-
-
-
-
-
-
-
+Publications on germanium computational efforts are not as common as many other main group elements. 
+Of those extant publications, the majority of final published data involve a Density Functional Theory (DFT) with either the 6-31G(d), 6-31G(d,p), or 6-311G(2d) basis set.\cite{GeCompStudy1}
+As with most other lighter elements calculated with Pople basis sets, the 6-31G(d,p) basis set is most commonly used for the final energy calculation.
+% WHY THIS? 
+% D AND P POLARIZATION INCLUDED IN CALCULATION - WHAT DOES THIS MEAN?
 
 \section{The Initial Problem: Germanium Study}
 
@@ -43,7 +35,7 @@ An example image of both compounds in their fully-trans configurations are provi
 	
 	\centering
 	
-	\includegraphics[width=0.75\textwidth]{placeholder.png}
+	\includegraphics[width=0.75\textwidth]{5geTTT.png}
 	
 	\caption{Fully trans configuration of pentagermanium-based compound.}
 	
@@ -55,7 +47,7 @@ An example image of both compounds in their fully-trans configurations are provi
 	
 	\centering
 	
-	\includegraphics[width=0.75\textwidth]{placeholder.png}
+	\includegraphics[width=0.75\textwidth]{6geTTT.png}
 	
 	\caption{Fully trans configuration of hexagermanium-based compound.}
 	
@@ -77,8 +69,9 @@ An example image of both compounds in their fully-trans configurations are provi
 	\label{tab:Ge6CollabEnergies}
 	
 \end{table}
-Dr. Weinert had worked previously with an additional collaborator who provided conformation data supplied in table \ref{tab:Ge6CollabEnergies}.
-If I want to cite somebody, all I do is type in the citation for \cite{BFIceOG}.
+Dr. Weinert had worked previously with a collaborator who provided conformation data supplied in table \ref{tab:Ge6CollabEnergies}.
+While the basis set was not explicitly provided, it is likely that the most common 6-31G(d,p) basis set was used. 
+Unfortunately, the collaborator is no longer active in research and was inaccessible for clarification.
 
 The approach of labeling the conformation shape of each compound, given the many points of torsion, focuses on the backbone structure. 
 As the raw data from the collaborator was not available, the general dihedral angles of cis and trans proved a vexing focus for initial efforts at conformer design.
@@ -275,7 +268,7 @@ A generic effort at producing a method in this style is detailed in chapter \ref
 	
 	\centering
 	
-	\includegraphics[width=0.75\textwidth]{placeholder.png}
+	\includegraphics[width=0.75\textwidth]{6geTCT.png}
 	
 	\caption{Visualization of a trans-cis-trans hexagermane structure.}
 	
@@ -294,61 +287,6 @@ Potentially, this would allow investigators to much more quickly eliminate high 
 The approach to acquiring sufficient data for a possible correction factor involved running an extremely simplified form of the germanium compounds, specifically a butagermanium backbone with hydrogens occupying all terminal and internal bonds.
 This reduced the complication and complexity of bulkiness and allowed for quick full torsion rotations about the single Ge-Ge-Ge-Ge dihedral.
 By operating at intervals of 5$^{\circ}$, a full torsion drive provides a glimpse at relative energies of the molecule at 72 discrete states. 
-An example plot of this torsion drive is shown in figure \ref{fig:EXTorsion} Once multiple torsion drives had completed in multiple group four elements (isobutyl C, Si, and Ge were all built and tested), the energies could be compared and analyzed for any relative or absolute scaling at the additive or multiplicative reference. 
-%MORE
-
-\begin{figure}
-	
-	\centering
-	
-	\includegraphics[width=0.75\textwidth]{placeholder.png}
-	
-	\caption{Visualization of a multiple pure group IV torsions at various theories and basis sets}
-	
-	\label{fig:EXTorsion}
-	
-\end{figure}
-
-For a full comparative set, 3456 points of analyzed data were generated for each reference molecule's free energy in comparison with the others. 
-Unsurprisingly, no simple correction factor arose by method of a simple additive or multiplicative term applied toward all torsion points. 
-A visual trend arose with these drives, where curios results arose.
-%
-%newmanproject-esque expected energies. no surprise! add pictures! include
-%
-A future avenue of research would be to further explore this with depressive or polynomial terms to discover whether a simple corrective function might exist with specific molecules.
-
-While the comparisons between different group 4 elements did not yield positive results, a similar approach with differing functionals and basis sets was also attempted. 
-While this approach likewise did not find any simple correction factor, a graphical representation of multiple functionals across the isobutyl C, Si, and Ge show an interesting trend, as visualized by a graph provided by Dr. Christopher Fennell and shown in figure \ref{fig:FennellTorsion}
-
-\begin{figure}
-	
-	\centering
-	
-	\includegraphics[width=0.75\textwidth]{placeholder.png}
-	
-	\caption{Visualization of a multiple pure group IV torsions at various theories and basis sets}
-	
-	\label{fig:FennellTorsion}
-	
-\end{figure}
-
-As expected by different types of calculations, the torsion graphs hold different internal relative energies. 
-For carbon, all four functionals produced a clean curve. 
-The AM1 and PM3 functionals produced unexpected results for both Si and Ge graphs. 
-In each, the expected highest energy 0$^{\circ}$ torsion angle was instead the most favorable of the three eclipsed angles.
-Additionally, the Si PM3 and the Ge AM1 and PM3 functionals showed strong spikes along the expectedly smooth curve, with the Ge PM3 being noticeably broken.
-% MAKE SURE THIS IS CORRECT
-These are likely due to the additional electronic interactions from the additional electron shells of Si and also the d-orbital electrons in Ge.
-% MAKE SURE THIS IS CORRECT
-While the Si graphs smoothed out for the B3LYP and HF functionals at STO-3G basis set, the Ge B3LYP showed significant spikes and only the HF STO-3G exhibited a smooth curve.
-Effectively, this discovery of spikes along torsion drives led to the realization that the validity of a basis set could possibly be determined by the smoothness of a torsion drive.
-For example, any calculation of a germanium-containing molecule will likely not produce reliable results with a B3LYP hybrid functional and STO-3G basis set, while the Hartree Fock STO-3G calculation would at least be tentatively reliable for comparative energy levels at various conformations.
-
-The next natural step was to calculate and plot additional functional theories and basis sets with the isobutagermanium chain. 
-While effectively a lightly guided meandering through the available calculation types, the first effort was to observe relative differences across multiple basis sets of the Hartree Fock theory and to examine the relative computational requirements of each.
-This plan was quickly redirected, however, when a curiosity within the data was revealed.
-
-\subsection{Discovery of a Consistent Inconsistency}
 
 The extended round of torsion drive calculations included an alteration in representation of the data.
 As the focus had shifted from relative energies and intensities across multiple theories and basis sets to a focus on graph smoothness and internal relative energies, the energy axis of plots were reduced to a unitless scale ranging 0 to 1, where 0 represents the minimum energy and 1 represents the maximum energy in a given set of torsion drive data.
@@ -363,16 +301,146 @@ E_{i, red} = \frac{E_{i,abs} - E_{min,abs}}{E_{max,abs}-E_{min,abs}}
 % NEEDS SOME WORK
 \end{equation}
 
-Need more: Actually finding the Ge problem, and confirming it.
+An example plot of this torsion drive is shown in figure \ref{fig:EXTorsion} Once multiple torsion drives had completed in multiple group four elements (butyl C, Si, and Ge were all built and tested), the energies could be compared and analyzed for any relative or absolute scaling at the additive or multiplicative reference. 
+%MORE
+
+\begin{figure}
+	
+	\centering
+	
+	\includegraphics[width=0.75\textwidth]{Ge4HFSTO3G.png}
+	
+	\caption{Sample torsion plot at reduced energy scale.}
+	
+	\label{fig:EXTorsion}
+	
+\end{figure}
+
+For a full comparative set, 3456 points of analyzed data were generated for each reference molecule's free energy in comparison with the others. 
+Unsurprisingly, no simple correction factor arose by method of a simple additive or multiplicative term applied toward all torsion points. 
+To expand on the comparative set, a set of butyl- group IV conformers were generated with every possible permutation of C, Si, and Ge, each then rotated about the torsion in 5$^{\circ}$ increments to produce a total 5832 conformers.
+These were then subject to the same data comparison method as before, again to no noticeable trend.
+A future avenue of research could be to further explore this with depressive or polynomial terms to discover whether a simple corrective function might exist with specific molecules.
+
+While this approach likewise did not find any simple correction factor, a graphical representation of multiple functionals across the butyl C, Si, and Ge show an interesting trend, as visualized by a graph provided by Dr. Christopher Fennell and shown in figure \ref{fig:FennellTorsion}.
+\begin{figure}
+	
+	\centering
+	
+	\makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{FennellTorsion.png}}
+	
+	\caption{Visualization of a multiple pure group IV torsions at various theories and basis sets}
+	
+	\label{fig:FennellTorsion}
+	
+\end{figure}
+A common theme of these graphs is that the relative energies follow the expected energetic barrier of a Newman projection, with local maxima at the 120$^{\circ}$ and 240$^{\circ}$ (or -120$^{\circ}$) angles and local minima at the 60$^{\circ}$ and 300$^{\circ}$ (or -60$^{\circ}$).
+The global maximum and minimum were consistently at 0$^{\circ}$ and 180$^{\circ}$ angles, respectively.
+As expected by different types of calculations, the torsion graphs hold different internal relative energies. 
+For carbon, all four functionals produced a clean curve. 
+The AM1 and PM3 functionals produced unexpected results for both Si and Ge graphs. 
+In each, the expected highest energy 0$^{\circ}$ torsion angle was instead the most favorable of the three eclipsed angles.
+Additionally, the Si PM3 and the Ge AM1 and PM3 functionals showed strong spikes along the expectedly smooth curve, with the Ge PM3 being noticeably broken.
+
+While the Si graphs smoothed out for the B3LYP and HF functionals at STO-3G basis set, the Ge B3LYP showed significant spikes and only the HF STO-3G exhibited a smooth curve.
+Effectively, this discovery of spikes along torsion drives led to the realization that the validity of a basis set could possibly be determined by the smoothness of a torsion drive.
+For example, any calculation of a germanium-containing molecule will likely not produce reliable results with a B3LYP hybrid functional and STO-3G basis set, while the Hartree Fock STO-3G calculation would at least be tentatively reliable for comparative energy levels at various conformations.
 
 
+\section{Discovery of a Consistent Inconsistency}
 
+The next natural step was to calculate and plot additional functional theories and basis sets with the butagermanium chain. 
+While effectively a lightly guided meandering through the available calculation types, the first effort was to observe relative differences across multiple basis sets of the Hartree Fock theory and to examine the relative computational requirements of each.
+This plan was quickly redirected, however, when a curiosity within the data was revealed.
 
+While running additional torsion drives of butagermane at differing basis sets and functional theories, an inverted energy was discovered. 
+As can be seen in figure \ref{fig:geTorsFirst}, the B3LYP theory with 6-31G(d) basis set appears flipped upon a cursory glance. 
+After a more careful observation, the minima and maxima are at the "wrong" angles and cannot be a simple flip of the minima and maxima.
+Instead, the data is simply junk.
 
+\begin{figure}
+	
+	\centering
+	
+	\includegraphics[width=0.75\textwidth]{geTorsFirst.png}
+	
+	\caption{A curious seemingly-inverted torsion plot of butagermane.}
+	
+	\label{fig:geTorsFirst}
+	
+\end{figure}
 
+Naturally, the focus shifted toward discovering the source of the bad data.
+A repeat of the trial yielded the same data.
+A repeat of the system with a freshly created butagermane yielded the same data.
+A trial with data from a butagermane trial with the 6-31G(d,p) basis set yielded the same data.
+Each attempt at a 6-31G(d) basis set with the B3LYP theory yielded junk data, while other basis sets within the theory produced expected data. 
+Next, the butagermane torsions were run with an identical basis set group with the Hartree-Fock theory, the results of which are shown in table \ref{fig:geTorsOne}.
 
+\begin{figure}
+	
+	\centering
+	
+	\includegraphics[width=0.75\textwidth]{geTorsOne.png}
+	
+	\caption{Hartree Fock energy minimization of butagermane torsion run at varying basis sets.}
+	
+	\label{fig:geTorsOne}
+	
+\end{figure}
 
+Surprisingly, the 6-31G(d) result was also strangely inverted.
+This process was repeated for several more theories, with the 6-31G(d) basis set results plotted in figure \ref{fig:geTorsAll}.
+Curious to see if the germanium atom's basis set data or if the entire basis set method was the source, a similar run with butasilane was made and graphed in figure \ref{fig:siTorsOne}, to expected results.
+\begin{figure}
+	
+	\centering
+	
+	\includegraphics[width=0.75\textwidth]{geTorsAll.png}
+	
+	\caption{Minimization of butagermane torsion run at varying theories and the 6-31G(d) basis set.}
+	
+	\label{fig:geTorsAll}
+	
+\end{figure}
+\begin{figure}
+	
+	\centering
+	
+	\includegraphics[width=0.75\textwidth]{siTorsOne.png}
+	
+	\caption{B3LYP energy minimization of butasilane torsion run at 6-31G(d) basis set.}
+	
+	\label{fig:siTorsOne}
+	
+\end{figure}
+A quick run confirmed the problem to also exist on Gaussian 03 as well as Gaussian 09.
+The final effort was to check whether this error was isolated to Gaussian 09 or to all QM programs. 
+A simplified test to calculate the energy of the expected global minimum (180$^{\circ}$) and maximum (0$^{\circ}$) of a Hartree Fock theory with the suspect 6-31G(d) basis set was prepared and executed, with the results tabulated in \ref{tab:geHFAppData}.
+As can be seen, critical energetic difference was negative for Gaussian 09 and positive for both GAMESS and NWChem.
+Since the expected conformations should yield a positive difference, it was concluded that both Gaussian 03 and 09 contain bad 6-31G(d) basis set data for germanium.
 
+\begin{table}[]
+	\centering
+	\begin{tabular}{lllll}
+		Program & \begin{tabular}[c]{@{}l@{}}Trans Energy\\ (Hartree)\end{tabular} & \begin{tabular}[c]{@{}l@{}}Cis Energy\\ (Hartree)\end{tabular} & \begin{tabular}[c]{@{}l@{}}∂ Energy\\ trans - cis\\ (Hartree)\end{tabular} & \begin{tabular}[c]{@{}l@{}}∂ Energy\\ trans - cis\\ (kcal / mol)\end{tabular} \\ \hline
+		\multicolumn{1}{l|}{Gaussian} & -8298.8259 & -8298.8268 & -0.0009 & -0.5775 \\
+		\multicolumn{1}{l|}{GAMESS} & -8306.1290 & -8306.1290 & 0.0040 & 2.4975 \\
+		\multicolumn{1}{l|}{NWChem} & -8306.1290 & -8306.1250 & 0.0040 & 2.4974
+	\end{tabular}
+	\caption{Energy comparison of HF theory with 6-31G(d) basis set across multiple computational programs. The expected ∂E should be positive.}
+	\label{tab:geHFAppData}
+\end{table}
+
+\section{Final Thoughts}
+
+Unfortunately, a trend for simplifying the computation requirements of germanium was not discovered.
+While it may exist among the data as a more involved function or as some other representation, there also may very well be no simple trend for switching between germanium and another group IV element.
+
+On a much more interesting note, the results of the torsion drives revealed that Gaussian 03 and 09 contain some mistake within the 6-31G(d) basis set data for germanium. 
+Considering the popularity of Gaussian software in computational chemistry, there are concerning implications about reliability of data for any germanium energy data with the 6-31G(d) basis set. 
+Given that the torsion tests produced expected data for 6-31G(d) data subsequently run through a higher or lower basis set, only reported data with 6-31G(d) as the final calculated energy need be considered.
+It is recommended that any investigator into computational aspects of germanium either replace the basis set data, use another basis set, or instead use a program like GAMESS or NWChem for that final computation.
 
 
 
