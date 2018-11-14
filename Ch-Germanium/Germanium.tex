@@ -104,7 +104,7 @@ The initial approach involved an attempt at basic replication of the collaborati
 As detailed below, the design gradually grew in complexity as a learning process. 
 Eventually, curiosities in results and a desire to automate an objective search algorithm developed into two unique investigations.
 
-\subsubsection{Design 1: Occam's Smallest Razer}
+\subsubsection{Design 1: Occam's Smallest Razor}
 
 With each non-terminal Ge-Ge dihedral initially labeled cis or trans for 0$^{\circ}$ or 180$^{\circ}$, about 3 unique pentagermanium and 6 unique hexagermanium structures were built visually on a 3D visualization program (Avogadro).
 These were rotated without consideration for the phenyl rings populating the non-terminal Ge atoms.
@@ -166,7 +166,7 @@ The results of these calculations are tabulated in tables \ref{tab:Ge5Ver2Data} 
 		phenyl & isopropyl & 300-180 & -12341.23706 & 0 & 0 \\
 		phenyl & isopropyl & 300-300 & DNC & DNC & DNC
 	\end{tabular}
-	\caption{Data of B2LYP/STO-3G minimization of variations of pentagermane compound at various conformers. DNC denotes a failure to converge with the self-consistent field method.}
+	\caption{Data of B3LYP/STO-3G minimization of variations of pentagermane compound at various conformers. DNC denotes a failure to converge with the self-consistent field method.}
 	\label{tab:Ge5Ver2Data}
 \end{table}
 
@@ -212,7 +212,7 @@ The results of these calculations are tabulated in tables \ref{tab:Ge5Ver2Data} 
 		phenyl & isopropyl & 300-300-180 & DNC & DNC & DNC \\
 		phenyl & isopropyl & 300-300-300 & DNC & DNC & DNC
 	\end{tabular}
-	\caption{Data of B2LYP/STO-3G minimization of variations of hexagermane compound at various conformers. DNC denotes a failure to converge with the self-consistent field method.}
+	\caption{Data of B3LYP/STO-3G minimization of variations of hexagermane compound at various conformers. DNC denotes a failure to converge with the self-consistent field method.}
 	\label{tab:Ge6Ver2Data}
 \end{table}
 
@@ -377,11 +377,20 @@ A trial with data from a butagermane trial with the 6-31G(d,p) basis set yielded
 Each attempt at a 6-31G(d) basis set with the B3LYP theory yielded junk data, while other basis sets within the theory produced expected data. 
 Next, the butagermane torsions were run with an identical basis set group with the Hartree-Fock theory, the results of which are shown in table \ref{fig:geTorsOne}.
 
+Surprisingly, the 6-31G(d) result was also strangely inverted.
+This process was repeated for several more theories, with the 6-31G(d) basis set results plotted in figure \ref{fig:geTorsAll}.
+Curious to see if the germanium atom's basis set data or if the entire basis set method was the source, a similar run with butasilane was made and graphed in figure \ref{fig:siTorsOne}, to expected results.
+A quick run confirmed the problem to also exist on Gaussian 03 as well as Gaussian 09.
+The final effort was to check whether this error was isolated to Gaussian 09 or to all QM programs. 
+A simplified test to calculate the energy of the expected global minimum (180$^{\circ}$) and maximum (0$^{\circ}$) of a Hartree Fock theory with the suspect 6-31G(d) basis set was prepared and executed, with the results tabulated in \ref{tab:geHFAppData}.
+As can be seen, critical energetic difference was negative for Gaussian 09 and positive for both GAMESS and NWChem.
+Since the expected conformations should yield a positive difference, it was concluded that both Gaussian 03 and 09 contain bad 6-31G(d) basis set data for germanium.
+
 \begin{figure}
 	
 	\centering
 	
-	\includegraphics[width=0.75\textwidth]{geTorsOne.png}
+	\includegraphics[width=\textwidth]{geTorsOne.png}
 	
 	\caption{Hartree Fock energy minimization of butagermane torsion run at varying basis sets.}
 	
@@ -389,20 +398,18 @@ Next, the butagermane torsions were run with an identical basis set group with t
 	
 \end{figure}
 
-Surprisingly, the 6-31G(d) result was also strangely inverted.
-This process was repeated for several more theories, with the 6-31G(d) basis set results plotted in figure \ref{fig:geTorsAll}.
-Curious to see if the germanium atom's basis set data or if the entire basis set method was the source, a similar run with butasilane was made and graphed in figure \ref{fig:siTorsOne}, to expected results.
 \begin{figure}
 	
 	\centering
 	
-	\includegraphics[width=0.75\textwidth]{geTorsAll.png}
+	\includegraphics[width=\textwidth]{geTorsAll.png}
 	
 	\caption{Minimization of butagermane torsion run at varying theories and the 6-31G(d) basis set.}
 	
 	\label{fig:geTorsAll}
 	
 \end{figure}
+
 \begin{figure}
 	
 	\centering
@@ -414,11 +421,7 @@ Curious to see if the germanium atom's basis set data or if the entire basis set
 	\label{fig:siTorsOne}
 	
 \end{figure}
-A quick run confirmed the problem to also exist on Gaussian 03 as well as Gaussian 09.
-The final effort was to check whether this error was isolated to Gaussian 09 or to all QM programs. 
-A simplified test to calculate the energy of the expected global minimum (180$^{\circ}$) and maximum (0$^{\circ}$) of a Hartree Fock theory with the suspect 6-31G(d) basis set was prepared and executed, with the results tabulated in \ref{tab:geHFAppData}.
-As can be seen, critical energetic difference was negative for Gaussian 09 and positive for both GAMESS and NWChem.
-Since the expected conformations should yield a positive difference, it was concluded that both Gaussian 03 and 09 contain bad 6-31G(d) basis set data for germanium.
+
 
 \begin{table}[]
 	\centering
