@@ -504,7 +504,8 @@
 %*****************************Nomenclature
 % ********************************************************
 \newenvironment{nomenclature}
-  {\newpage \renewcommand{\thepage}{\roman{page}}
+  {
+  	\newpage \renewcommand{\thepage}{\roman{page}}
      {\centering \ssp \rule{0in}{1in} \par
         NOMENCLATURE \par
         \vspace*{0.25in} \par \dsp}
