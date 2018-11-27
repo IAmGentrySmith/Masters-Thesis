@@ -8,7 +8,7 @@ Ice has many forms, each with unique environments and structures that give rise 
 \subsection{Bernal-Fowler Ice Rules}
 
 Based on their paper published in 1933, the Bernal-Fowler Ice Rules are the foundational observations of how water molecules interact in an ice structure and have remained the standard for ice bonding rules for nearly a century.
-Essentially, water's tetrahedral structure allows for four interactions on each molecule. 
+Although a bent, divalent molecule, water possesses an electronic tetrahedral structure that allows for four interactions on each molecule.
 The two protons allow for a hydrogen bond with a lone pair from a neighboring oxygen atom.
 Similarly, the oxygen atom's two lone pairs allow for a hydrogen bond with a neighboring proton. 
 These rules are fairly rigid in the sense that every water molecule can interact with two oxygen atoms and two protons from four surrounding water molecules.
@@ -24,20 +24,20 @@ The subject of this work will be on the proton-ordered orthorhombic ice XI and i
 
 \subsection{Ice I$_{h}$}
 
-Ice I$_{h}$ naturally forms in pure solution at temperatures in the 72 K to 273.15 K range at at pressures in the 1 Pa to 100 MPa range, with some temperature curving off into the vapour and liquid phases at very high and very low pressures.
+Ice I$_{h}$ naturally forms in pure solution at temperatures in the 72 K to 273.15 K range at pressures in the 1 Pa to 100 MPa range, with some temperature curving off into the vapour and liquid phases at very high and very low pressures.
 As the most commonly found form on earth, ice I$_{h}$ is a highly desired form for computational studies involving ice systems for investigators investigating ice simulations in normal earth conditions.
 
 As famously discussed by Linus Pauling, hexagonal ice water contains a residual entropy at very low temperatures.\cite{PaulingIce} 
 This residual entropy goes according to Boltzmann's entropy equation $K=Ln(W)$ where $W=(\frac{3}{2})^{N}$ for N molecules in the crystal.
-He additionally predicted that a ice may exist at sufficiently low temperatures with zero entropy.
-%P/T deets
+He additionally predicted that an ice structure may exist at sufficiently low temperatures with zero residual entropy.
+% WHY IS ICE IH MORE VALUABLE IN RESEARCH???????
 % As an interesting specificity, the ice I$_{h}$ structure does not include any proton-disordered crystal with the same oxygen spatial positioning. % NEED SOURCE BEFORE INCLUDING
 
 
 \subsection{Efforts to Generate Ice I$_{h}$}
 
 
-The most commonly cited effort to create an ice I$_{h}$ crystal comes from \cite{MCIce}. 
+A commonly referenced effort to create an ice I$_{h}$ crystal comes from Victoria Buch's 1998 paper. \cite{MCIce}
 Her work involved a monte carlo effort to generate ice I$_{h}$ by initializing a deprotonated oxygen structure, randomly placing the appropriate number of protons, and then using MC methods to adjust the structure until every oxygen atom was bonded to exactly two hydrogen bonds.
 
 
@@ -53,6 +53,7 @@ As the protons and lone pairs are no longer consistently ordered, hydrogen bonds
 The interaction of proton with proton or lone pair with lone pair are not hydrogen bonds and are considered defects in the lattice. 
 An ice structure of randomly oriented molecules without consideration of hydrogen bonds will likely produce defects at many interaction sites across the lattice and weaken the integrity of the system, leading to stability problems while running simulations. 
 In generating the crystal, the cause of these defects must be considered and countered effectively.
+While other stable hydrogen bonding structures may exist, they would either break the Bernal-Fowler ice rules or alter the structure away from the specified form.
 
 %sub-ish section: necessary attributes to change to convert XI to Ih
 
@@ -101,7 +102,10 @@ The third, fourth, and fifth indices define the X, Y, and Z position coordinates
 Identifying the neighboring molecules proved computationally difficult. 
 The most effective method is to find the closest four molecules by computing a distance calculation between every two oxygen atoms.
 This ensures every molecule is considered, but also presents significant hurdles.
-First, a distance calculation utilizes an extremely computationally-inefficient square root calculation, which can be ignored by instead calculating the squared-distance between molecules and finding the lowest values.
+First, a distance calculation utilizes an extremely computationally-inefficient square root calculation.
+The inefficiency lies in the binary-based command for calculating a square root that often utilizes either a logarithmic solution or a Newtonian approximation that requires 16-64 processor cycles.
+This square root computation can be entirely bypassed by instead comparing the squared-distance between molecules and finding the lowest values.
+These squared-distances scale identically to the square root value for all distances greater than one, which is true for the ice XI structures sampled in this work.
 
 Second, molecules on the walls and edges of the molecule will not have four neighbors in the non-periodic crystal. 
 This is accounted for by shifting all six sides to make a pseudo-periodicity for these edge cases. 
@@ -130,6 +134,7 @@ Future versions of this method may account for the variations.
 Once the tetrahedral positions have been defined, each water molecule is ready to rotate.
 What may seem the most crucial step in this methods ends up being the most simple.
 As designed, the rotation of water molecules is as simple as using a stepwise iterator to pseudorandomly select two tetrahedral positions for the hydrogen bonds and store the new positions in a new crystal array.
+These new positions are determined sequentially and immediately, so to speak, in the time-independent manipulation of the  crystal.
 An extremely important note is that this rearrangement does not consider the orientations of neighboring molecules and likely introduces defects of hydrogen - hydrogen and lone pair - lone pair interactions.
 The likelihood of a defect-free interaction lattice forming is nearly zero and is assumed to have a great deal of defects within the lattice. 
 % PROVE IT?
@@ -150,8 +155,8 @@ This allows for contextual changes during the correction step.
 
 Once the hydrogen bond defects have been discovered and marked, each needs to be corrected.
 The most direct approach to this is to sequentially walk through each defect and repeat the pseudorandom rotation until the number of defective regions is zero or a user-specified value.
-The current implementation sorts the defect list by the number of defects and attempts to fix the most defective molecules first.
-The most defective molecules may include defects impossible to solve by simple rotation, specifically when neighboring molecules have collectively directed three or four hydrogen atoms or electron lone pairs at the target water. 
+The current implementation sorts the defect list by the number of defects and attempts to fix the most defective molecules first because of the highest-density entropy introduced into the system.
+These most defective molecules may include defects impossible to solve by simple rotation, specifically when neighboring molecules have collectively directed three or four hydrogen atoms or electron lone pairs at the target water. 
 These can only be solved by adjusting one or more of the neighboring molecules until the number of hydrogen atoms and electron lone pairs have balanced.
 Unfortunately, this high-defect problem can quickly escalate if the neighboring molecules contain the same problem of unbalanced hydrogen atoms and electron lone pairs. 
 The current solution is to recursively check for and fix these impossible interactions first, but has not yet yielded a defect-free crystal in testing.
