@@ -36,9 +36,18 @@
 
 %====================== bibliography ============================================
 % OLD DEFAULT CLASS
-%\usepackage[super]{natbib} %bibliography citation style with round brackets
 
 \usepackage{cite}
+\usepackage[super]{natbib} %bibliography citation style with round brackets
+
+%\newcommand*{\citen}[1]{%
+%	\begingroup
+%	\romannumeral-`\x % remove space at the beginning of \setcitestyle
+%	\setcitestyle{numbers}%
+%	\cite{#1}%
+%	\endgroup   
+%}
+
 
 %====================== AMS math packages =======================================
 \usepackage{amsmath}
@@ -63,6 +72,7 @@
 \usepackage{url} % allow typsetting urls
 \usepackage{setspace} % allow easy variation of line spacing
 \usepackage{lipsum}
+\usepackage{indentfirst} % indents the first paragraph of each section/chapter
 
 %====================== margin comments ========================================
 \setlength{\marginparwidth}{1.0in}

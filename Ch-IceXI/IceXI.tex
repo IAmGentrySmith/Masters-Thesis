@@ -86,7 +86,7 @@ Crystal files where defined and saved as Protein Data Bank (.pdb) files as this 
 
 \subsection{Generation of Source Ice XI}
 
-This is Dr. Fennell's method to create an ice XI pdb file. 
+This is Dr. Fennell's method to create an ice XI .pdb file. 
 Basically, the ice XI unit cell of eight water molecules is repeated as desired to create a sufficiently large crystal.
 The primarily used crystal consists of a 3 x 3 x 6 unit cell repetition totaling 432 water molecules.
 
@@ -208,8 +208,8 @@ This may be due to some accidental pattern in the method's implementation.
 %
 %
 %
-\section{Comparison with Other Methods}
-% USE BUTH PAPER
+\section{Comparison to Buch's Method}
+% USE BUCH PAPER
 Currently in progress, this section will primarily compare the results of this method with \cite{MCIce}.
 \subsection{benefits of own method over others}
 \subsection{benefits of other methods over this}
@@ -222,12 +222,12 @@ Currently in progress, this section will primarily compare the results of this m
 
 \section{Comments on Limitations and Proposed Improvements}
 
-During the hydrogen bond defect correction step, a weakness in the design is that any clustering or regions of high defect density will not be noticed.
+During the hydrogen bond defect correction step, a weakness in the design is that any clustering or regions of high defect density will not be treated uniquely.
 This allows the existence of a highly-defective region within the larger structure that could potentially cause problems when the crystal is used in simulations. 
 The prevalence and occurrence of these defects have not been studied in this work, but seem a natural inevitability of statistics. 
 % SHOW THE STATS
 A potential solution with partial development will score regions based on the number of defects as a weighted function expanding out from a central molecule for N connections. 
-For example, consider a given molecule defined as level 1. 
+For example, consider a specific water defined as level 1. 
 The neighboring four molecules are defined as level 2, and continued onward excepting already-defined molecules out to an N$^{th}$ level. 
 The number of defects in each level can be counted and averaged.
 Then a depressive factor along the lines of $\frac{1}{level}$ can be used to diminish the value of defects further away from the first-level molecule.

@@ -1,10 +1,21 @@
 \chapter{Ice Ih to Ice XI Conversion}
 \label{ch:App:CrystalDisorg}
 
-Listed below is the source code utilized in the conversion of a PDB Ice Ih structure into an Ice XI structure. This code is functional in a Python 2.7 environment with NumPy and SciPy packages included.
+Listed below is the source code utilized in the conversion of a .pdb Ice Ice I$\mathrm{_{h}}$ structure into an Ice XI structure. This code is functional in a Python 2.7 environment with the included packages: NumPy version 1.14.3 and SciPy version 1.1.0.
 
 \section{Code: Crystal Disorganizer Tool}
 \lstinputlisting[language=Python,breaklines=true]{codes/PDBDisorganize.py}
+
+\section{PDB: Parent Ice XI}
+
+The following shows the parent Ice XI .pdb file used. Any .pdb file of an ice structure that follows the HETATM or ATOM style and the Bernal-Fowler ice rules should also work.
+\lstinputlisting[breaklines=true]{codes/IceXI.pdb}
+
+\section{PDB: Sample Generated Ice I$\mathrm{_{h}}$}
+
+The following details a generated Ice I$\mathrm{_{h}}$ .pdb file from the above parent.
+
+\lstinputlisting[breaklines=true]{codes/IceIh.pdb}
 
 % REMOVED: REMOVED CHAPTER FROM THESIS
 %\chapter{Two-Dimensional Rose-Potential Water}
