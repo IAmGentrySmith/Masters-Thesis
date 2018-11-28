@@ -19,9 +19,9 @@ The answer lies in energy cascades through a visualization tool called a golf co
 \subsection{Levinthal Golf Courses}
 
 If one imagines the energy landscape of a peptide chain like a golf course, interesting similarities arise.
-For example, the lowest point could be considered "the hole" of the course with the lowest energy conformer. 
-When starting at the "tee off" point, there may not be a clean pathway of energetic difference for the ball to throw.
-Therefore, the ball must be "struck" toward the hole in a series of motions where the ball is removed from one local minima and placed in another hopefully closer to the hole. 
+For example, the lowest point could be considered ``the hole" of the course with the lowest energy conformer. 
+When starting at the ``tee off" point, there may not be a clean pathway of energetic difference for the ball to roll toward the global minima.
+Therefore, the ball must be ``struck" toward the hole in a series of motions where the ball is removed from one local minima and placed in another hopefully closer to the hole. 
 Like the image shown in figure \ref{fig:DillGC}, the course is not always an easy, natural cascade toward the global minima.
 Most often, investigators will initiate several searches in several locations of this conformation landscape in hopes that one will discover a clear minima that is hopefully the true global minima.
 
@@ -40,13 +40,14 @@ Most often, investigators will initiate several searches in several locations of
 
 \section{Purpose of Project}
 
-As introduced in chapter \ref{ch:Germanium}, there may be a generic solution toward discovering the tetrahedral lowest energy conformer by roughly sampling the full "golf course" and procedurally focusing in on hot spots using automated methods.
+As introduced in chapter \ref{ch:Germanium}, there may be a generic solution toward discovering the tetrahedral lowest energy conformer by roughly sampling the full ``golf course" and procedurally focusing in on hot spots using automated methods.
 Ideally, the tool would work through the seemingly infinite possibilities and quickly remove the impossible or duplicate conformers.
 The tool would roughly take shape though the following pattern.
 Run through a set of dihedral positions at a constant interval. 
 Selection of lowest-energy optimization organized on dihedral values. 
 Quick determination of importance of dihedral based on how heavily it impacts internal energy. 
-Splitting "best" dihedral(s) into smaller interval to repeat the process. 
+% FRAGMENT BELOW. FIX!
+Splitting ``best" dihedral(s) into smaller interval to repeat the process. 
 
 An overview of system flow given in figure \ref{fig:VRSDesign}.
 \begin{figure}
@@ -89,7 +90,7 @@ Effectively, it balances between running the first broad-scope search at relativ
 
 A common problem in all works on this topic is that the scale of truly searching the conformation landscape is expansive in even the most restrictive designs. 
 The manual efforts in the design of this tool are to build checkers for impossible conformations, including overlapping atom spaces.
-Additional considerations are that only the most bare, three conformations per rotatable bond angle be considered initially.
+Additional considerations are that only the most bare, three conformations per rotatable bond angle, be considered initially.
 After the first round of calculations, the scope of candidates should be reduced by several orders of magnitude by refining the search about lower energy regions in the landscape.
 
 
@@ -98,7 +99,8 @@ After the first round of calculations, the scope of candidates should be reduced
 The single greatest complication of this and any energy landscape tool is the number of rotatable bonds in the target molecule and, to a lesser extent, the elements contained.
 Consider the hexagermane molecule of interest in chapter \ref{ch:Germanium} and the general focus of this work.
 One can focus on the number of torsions available to be adjusted in the energy landscape, as shown in figure \ref{fig:Ge6Torsions}. 
-Even with the minimal three rotations per bond, these 19 rotatable bonds produce $3^{19} = 1,162,261,467$ conformers, which is realistically impossible to explore even with a computational method requiring five seconds to compute as 184 years of computation time would be required.
+Even with the minimal three rotations per bond, these 19 rotatable bonds produce $3^{19} = 1,162,261,467$ conformers, which is realistically impossible to explore even with a computational method requiring five seconds to compute.
+184 years of computation time would be required.
 This is where the balance between recognizing impossible conformations comes in.
 Especially with bulky molecules like this hexagermane, many conformations could be eliminated by way of checking for overlapping atoms.
 
@@ -118,13 +120,13 @@ However, a much more simple run with o-nitrophenol, with only two rotatable bond
 \begin{figure}
 	\centering 
 	\includegraphics[width=0.75\textwidth]{onpBad.png}
-	\caption{Highest energy conformer of o-nitrophenol, ignoring any ring strain conformations. Noticably was unable to rotate and form the hydrogen bond between ortho nitrogen and hydrogen.}
+	\caption{Highest energy conformer of o-nitrophenol, ignoring any ring strain conformations. This structure was notably unable to rotate and form the expected hydrogen bond between the ortho nitro and hydroxyl.}
 	\label{fig:onpBad}
 \end{figure}
 \begin{figure}
 	\centering 
 	\includegraphics[width=0.75\textwidth]{onpGood.png}
-	\caption{Lowest energy conformer of o-nitrophenol. Formed the expected hydrogen bond between the ortho nitrogen and hydrogen.}
+	\caption{Lowest energy conformer of o-nitrophenol. Formed the expected hydrogen bond between the ortho nitro and hydroxyl.}
 	\label{fig:onpGood}
 \end{figure}
 
@@ -137,4 +139,4 @@ While currently limited to the Cowboy cluster at Oklahoma State University, the 
 A potential solution for this abstract definition would be a small series of test runs to determine computational cost and general resource availability.
 
 Additionally, the number of rotatable bonds yields the single largest barrier to searching the full conformation space.
-With continued investigation and the inclusiveness with other works, it seems feasible that the insurmountable barrier to entry may yet be simplified in an objective way that does not perturb the system from finding the lowest energy conformer in any reasonably small molecule.
+With continued investigation and the inclusiveness with other works, it seems feasible that the insurmountable barrier to entry may yet be simplified in an objective way that does not prevent the system from finding the lowest energy conformer in any reasonably small molecule.
