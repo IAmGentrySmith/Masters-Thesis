@@ -27,9 +27,9 @@ The subject of this work will be on the proton-ordered orthorhombic ice XI and i
 	
 	\centering
 	
-	\includegraphics[width=0.75\textwidth]{placeholder.png}
+	\includegraphics[width=0.75\textwidth]{icephase.jpeg}
 	
-	\caption{Ice phase diagram. Taken from TBD.}
+	\caption{Ice phase diagram. Taken from Brini. \cite{BriniWaterProperties}}
 	
 	\label{fig:icePhases}
 	
@@ -42,7 +42,8 @@ As the most commonly found form on earth, ice I$_{\mathrm{h}}$ is the most relev
 
 As famously discussed by Linus Pauling, hexagonal ice water contains a residual entropy at very low temperatures.\cite{PaulingIce} 
 This residual entropy goes according to Boltzmann's entropy equation $S=KLn(W)$ where $W=(\frac{3}{2})^{N}$ for N molecules in the crystal.
-He additionally predicted that an ice structure may exist at sufficiently low temperatures with zero residual entropy.
+At near absolute zero temperatures, the residual entropy will not reach zero as the disordered water could settle into one of many microstates that fit the ``disordered" description.
+Pauling additionally predicted that an ice structure with perfectly ordered protons may exist at sufficiently low temperatures with zero residual entropy.
 % WHY IS ICE IH MORE VALUABLE IN RESEARCH???????
 % As an interesting specificity, the ice I$_{h}$ structure does not include any proton-disordered crystal with the same oxygen spatial positioning. % NEED SOURCE BEFORE INCLUDING
 
@@ -51,7 +52,7 @@ He additionally predicted that an ice structure may exist at sufficiently low te
 
 
 A commonly referenced effort to create an ice I$_{\mathrm{h}}$ crystal comes from Victoria Buch's 1998 paper. \cite{MCIce}
-Her work involved a Monte Carlo effort to generate ice I$_{\mathrm{h}}$ by initializing a deprotonated oxygen structure, randomly placing the appropriate number of protons, and then using MC methods to adjust the structure until every oxygen atom was bonded to exactly two protons.
+Her work involved a Monte Carlo effort to generate ice I$_{\mathrm{h}}$ by initializing a deprotonated oxygen structure, randomly placing the appropriate number of protons, and then using MC methods to adjust the structure until every oxygen atom was bonded to exactly two protons according to Bernal-Fowler ice rules.
 
 
 \subsection{Comparison between Ice XI and Ice I$_{h}$}
@@ -64,6 +65,7 @@ With ice I$_{h}$ crystals, the proton-disordered form introduces entropy by way 
 The disordered protons allow for a greater number of microstates in the organization of the crystal, increasing the multiplicity and, by its very definition, entropy.
 As the protons and lone pairs are no longer consistently ordered, hydrogen bonds may no longer form properly at all interaction sites. 
 The interaction of proton with proton or lone pair with lone pair are not hydrogen bonds and are considered defects in the lattice. 
+These are known as Bjerrum defects and referred as D with two protons or L with two lone pairs interacting.\cite{BjerrumDefects}
 An ice structure of randomly oriented molecules without consideration of hydrogen bonds will likely produce defects at many interaction sites across the lattice and weaken the integrity of the crystal, leading to stability problems while running simulations. 
 In generating the crystal, the cause of these defects must be considered and countered effectively.
 While other stable hydrogen bonding structures may exist, they would either break the Bernal-Fowler ice rules or alter the structure away from the specified form.
@@ -96,6 +98,7 @@ This section walks through the method developed to convert ice XI into ice I$_{\
 Python was chosen as the programming language of the tool due to its versatility and the ease of development due to the ``pseudocode" written style and the availability of scientific packages including SciPy and NumPy. 
 Python version 2.7 was specifically utilized.
 Crystal files where defined and saved as Protein Data Bank (.pdb) files as this format allows for defining multiple molecules within a larger structure with a simple X, Y, Z grid position format. 
+An example of this is provided in Appendix \ref{ch:App:CrystalDisorg}.
 
 \subsection{Generation of Source Ice XI}
 
@@ -108,6 +111,7 @@ It is important that the crystal be read and stored in an efficient method to ke
 As the file is read in, each molecule is stored as an entry in a multidimensional array where the first index is the molecule number. 
 Further, the second index defines the molecule number where 0 is oxygen and 1 and 2 are the protons. 
 The third, fourth, and fifth indices define the X, Y, and Z position coordinates. 
+This is functionally identitical to the .pdb format data, but compresses the data across multidimensional arrays for iterative use.
 
 \subsection{Identifying Neighboring Molecules}
 
@@ -125,7 +129,7 @@ Those periodically-neighboring molecules are flagged with a shifting value in th
 %% it can be done easily.
 %Unfortunately, the necessary code to implement the periodically-neighboring molecule detections requires a major rewrite of the entire tool and has not yet been implemented.
 
-Once these four neighboring oxygen atoms have been discovered for each water, the four hydrogen-bond interactions according for Bernal-Fowler ice rules with the neighbors describe an orientation defined by the location of each water's protons and lone pairs referred to as a tetrahedral position.
+Once these four neighboring oxygen atoms have been discovered for each water, the four hydrogen-bond interactions according for Bernal-Fowler ice rules with the neighbors describe an orientation defined by the location of each water's protons and lone pairs located at coordinates called tetrahedral positions.
 %Once these closest neighboring oxygen atoms have been discovered, the appropriate interacting tetrahedral position is identified by finding the closest of the four tetrahedral positions using the same squared-distance calculation with the four defined tetrahedral positions detailed in the next subsection.
 
 
@@ -134,13 +138,31 @@ Once these four neighboring oxygen atoms have been discovered for each water, th
 
 An important aspect of pseudorandom selection is the existence of a bank of options.
 Utilizing the ingestion portion of the tool to calculate and store all orientational possibilities proves effective for tracking position options.
+In this work, tetrahedral positions are defined as the four positions that a proton may occupy about a water molecule as the four electron groups extend from the oxygen.
 For each water molecule, the first two tetrahedral positions are known by the positions of the two hydrogen atoms. 
 The other two positions are found by rotating one hydrogen atom 120$^{\circ}$ twice about the vector from the oxygen atom through the other hydrogen atom and storing the resulting positions as tetrahedral positions three and four. 
+Prior to rotation, the third and fourth positions are occupied by lone pairs.
+According to the .pdb file style, though, lone pairs are implied from the atom data and are not explicitly stated in the file data.
+This allows for passive relocation of the lone pairs by redefining the proton positions about the water.
+A visualization of these four tetrahedral positions, two read and two generated, are shown and labeled in figure \ref{fig:tetXI}.
+
+\begin{figure}
+	
+	\centering
+	
+	\includegraphics[width=0.75\textwidth]{tetIce.png}
+	
+	\caption{Example Tetrahedral positions of a water molecule. The two spheres represent potential proton positions roughly occupied by lone pairs.}
+	
+	\label{fig:tetXI}
+	
+\end{figure}
 
 % something about normal 109.5º tetrahedral angle
 This does not produce an exactly correct tetrahedral position of potential hydrogen atoms due 104.5$^{\circ}$ of the H-O-H bond created by the variance in repulsive forces between the two lone pairs of electrons and two hydrogen atoms. 
 While a hydrogen bond is typically defined as an attractive interaction between a proton and one lone pair of electrons on Nitrogen, Oxygen, or Fluorene, this work restricts the definition to a computational implication.
-Here, a hydrogen bond refers to the space between two oxygen atoms in a crystal where exactly one proton is specified and the lone pair electrons are assumed according to Bernal-Fowler ice rules. 
+Here, a hydrogen bond refers to the space between two oxygen atoms in a crystal where exactly one proton and lone pair are directed toward one another according to Bernal-Fowler ice rules. 
+Conversely, hydrogen bonding does not occur if bjerrum L or D defects occur between the oxygens.
 % ^^^ REVIESE
 Fortunately, this difference is sufficiently small for visualization programs like Avogadro to still recognize hydrogen bonds between a rotated hydrogen atom and corresponding neighboring lone pair. 
 Currently, the method does not correct for these minor angle variations and relies on the user to anneal the crystal by way of simulation to fully adjust the angles. 
@@ -157,8 +179,7 @@ The new position data is saved to a new crystal array file similar to the parent
 These new positions are determined sequentially and ``instantaneously" in the time-independent manipulation of the crystal.
 An important note is that this rearrangement does not consider the orientations of neighboring molecules and likely introduces defects of hydrogen - hydrogen and lone pair - lone pair interactions.
 The likelihood of a defect-free interaction lattice forming is nearly zero and is presumed to have a large number of defects within the lattice. 
-% PROVE IT?
-% SHOW MATH WHY A LOT OF DEFECTS EXIST
+For example, the first molecule reoriented will have a $\frac{5}{6}$ chance of containing a defect.
 
 
 \subsection{Detecting Hydrogen Bond Defects}
@@ -221,7 +242,8 @@ Instead, it can be considered a proton-disordered orthorhombic ice crystal simil
 Unfortunately, the result is not without defect.
 When following the subsequent layers in the crystal, patterns emerge. 
 Inconsistently, some rows of waters remain consistent.
-Some of these are a uniform rotation of both hydrogen atoms, while others are just one consistently placed hydrogen atom.
+Some of these are a uniform rotation of both hydrogen atoms consistent across rows.
+These consistent rows can be observed in figure \ref{fig:iceIh} toward the center-left and center-right along the into-the-page axis.
 Multiple trials yield internally unique results, yet all contain these strange consistencies.
 This may be due to some accidental pattern in the method's implementation.
 A scoring function to analyze the ``randomness" of the crystal would confirm whether this pattern is imagined or real.
@@ -232,15 +254,16 @@ A scoring function to analyze the ``randomness" of the crystal would confirm whe
 %
 %
 \section{Comparison to Buch's Method}
-% USE BUCH PAPER
-Currently in progress, this section will primarily compare the results of this method with \cite{MCIce}.
-\subsection{benefits of own method over others}
-\subsection{benefits of other methods over this}
-%
-%
-%
-%
-% FINISH
+
+In her 1998 paper Victoria Buch proposed a MC-based system for converting ice XI to ice I$\mathrm{_{h}}$.\cite{MCIce} 
+In that method, an ice XI crystal would have all protons dissociated from oxygens by moving them to halfway between corresponding oxygens.
+By placing protons in the middle of two oxygens, this allowed MC methods to pseudorandomly move the protons toward one or another oxygen.
+Once moved, the Bernal-Fowler rules are applied to increase the chance of a proton association switch being accepted for invalid waters.
+
+As a comparison to this work, Buch's method is more likely to successfully produce a defect-free iceI $\mathrm{_{h}}$ crystal.
+In its current state, this work's method is not as efficient nor as effective as Buch's method.
+As a potential for future development, this method allows for defects to exist as a state value which could be used for annealing studies.
+
 
 
 \section{Comments on Limitations and Proposed Improvements}
@@ -250,6 +273,7 @@ This allows the existence of a highly-defective region within the larger structu
 The prevalence and occurrence of these defects have not been studied in this work, but seem a natural inevitability of statistics. 
 % SHOW THE STATS
 A potential solution with partial development will score regions based on the number of defects as a weighted function expanding out from a central molecule for N connections. 
+
 For example, consider a specific water defined as level 1. 
 The neighboring four molecules are defined as level 2, and continued onward excepting already-defined molecules out to an N$^{th}$ level. 
 The number of defects in each level can be counted and averaged.

@@ -8,8 +8,8 @@
 In 1969, a molecular biologist by the name of Cyrus Levinthal proposed a thought experiment regarding protein formation\cite{Levinthal}:
 
 Consider a relatively small 150-residue peptide chain completely unfolded.
-This protein will have 149 peptide bonds and therefore 149 rotatable bonds, 149 phi angles, and 149 psi angles. 
-Assuming three possible angle positions each, the number of possible folds of this protein follows as $3^{447}$.
+This protein will have 149 peptide bonds and therefore 149 phi angles and 149 psi angles. 
+Assuming three possible angle positions each, the number of possible folds of this protein follows as $3^{298}$.
 How does this peptide chain fold into the appropriate secondary and tertiary structures? 
 Even at attosecond rates of rotating and folding, this peptide chain would likely not fold into the correct structure for many times the age of the universe!
 Obviously, this is not the case, since proteins fold on the timescale of microseconds to milliseconds.\cite{LevParadoxCalculated}
@@ -31,7 +31,7 @@ Most often, investigators will initiate several searches in several locations of
 	
 	\includegraphics[width=0.75\textwidth]{DillGC.png}
 	
-	\caption{Example Levinthal Golf Course taken from reference \citen{DillLevGC}.}
+	\caption{Example Levinthal Golf Course taken from Dill. \cite{DillLevGC}.}
 	
 	\label{fig:DillGC}
 	
@@ -40,14 +40,14 @@ Most often, investigators will initiate several searches in several locations of
 
 \section{Purpose of Project}
 
-As introduced in chapter \ref{ch:Germanium}, there may be a generic solution toward discovering the tetrahedral lowest energy conformer by roughly sampling the full ``golf course" and procedurally focusing in on hot spots using automated methods.
+As introduced in chapter \ref{ch:Germanium}, there may be a generic solution toward determining the lowest energy conformer by roughly sampling the full ``golf course" and procedurally focusing in on hot spots using automated methods.
 Ideally, the tool would work through the seemingly infinite possibilities and quickly remove the impossible or duplicate conformers.
-The tool would roughly take shape though the following pattern.
-Run through a set of dihedral positions at a constant interval. 
-Selection of lowest-energy optimization organized on dihedral values. 
-Quick determination of importance of dihedral based on how heavily it impacts internal energy. 
-% FRAGMENT BELOW. FIX!
-Splitting ``best" dihedral(s) into smaller interval to repeat the process. 
+The tool would roughly take shape though a design flow detailed below.
+
+First, the system takes an input molecule and generates a number of conformers based on rotatable dihedrals.
+Second, a time-effective geometry optimization theory and basis set if necessary is selected and run files are generated and submitted to a cluster to compute.
+Third, the results are collected and analyzed; low-energy dihedral values are passed back through the system while high-energy dihedrals are logged and discarded.
+This restricts the conformation space to reduce the overall number of conformers generated and allows for more accurate and computationally-expensive theories and methods to calculate more reliable energies.
 
 An overview of system flow given in figure \ref{fig:VRSDesign}.
 \begin{figure}
@@ -59,14 +59,16 @@ An overview of system flow given in figure \ref{fig:VRSDesign}.
 \end{figure}
 This method produces an interesting multilayered visual plot with a zooming effect toward the lowest energy conformer.
 An example of how this might look for a two-dihedral molecule is given in figure \ref{fig:variableResolutionSample}.
+The outlined black boxes represent found regions of interest for future iterations of the method. 
+This would repeat as necessary until regions converge to one energy.
 
 \begin{figure}
 	
 	\centering
 	
-	\includegraphics[width=0.75\textwidth]{VRSGraphEX.jpeg}
+	\includegraphics[width=0.75\textwidth]{VRSGraphEX.png}
 	
-	\caption{Example variable resolution chart (hand-drafted, CGI pending)}
+	\caption{Example variable resolution search chart of two dihedrals with low-energy blue to high-energy red.}
 	
 	\label{fig:variableResolutionSample}
 		

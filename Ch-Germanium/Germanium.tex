@@ -1,21 +1,11 @@
 \chapter{Germanium Compounds and QM Concerns}
 \label{ch:Germanium}
 
-\section{Modeling Germanium Compounds}
-
-While primarily used in optical applications including fiber optic cables and solar cell systems, germanium-based compounds are also used as polymerization catalysts.
-Relative to many other elements on the periodic table, computational reports on germanium are not common.
-Recent works have shown germanium's potential to polarize light.
-
-% This will be an interesting section as there is extremely little in terms of Ge computational work. Perhaps a broader search will yield interesting results. For sake of thoroughness, I will also include work on computational energy optimization in general and work through complications brought by the size of Ge. I might also include a portion on the statistical spread of conformations at a given temperature (internal energy?) I may include a sentence or paragraph on Gaussian-based publications. 
-
-\subsection{Computational Complexity of Germanium Compounds}
-
-Publications on germanium computational efforts are not as common as many other main group elements. 
-Of those extant publications, the majority of final published data involve a Density Functional Theory (DFT) with either the 6-31G(d), 6-31G(d,p), or 6-311G(2d) basis set.\cite{GeCompStudy1}
-As with most other lighter elements calculated with Pople basis sets, the 6-31G(d,p) basis set is most commonly used for the final energy calculation.\cite{Weinert1,Weinert2}
-% WHY THIS? 
-% D AND P POLARIZATION INCLUDED IN CALCULATION - WHAT DOES THIS MEAN?
+%\section{Modeling Germanium Compounds}
+%
+%While primarily used in optical applications including fiber optic cables and solar cell systems, germanium-based compounds are also used as polymerization catalysts.
+%Relative to many other elements on the periodic table, computational reports on germanium are not common.
+%Recent works have shown germanium's potential to polarize light.
 
 \section{The Initial Problem: Germanium Study}
 
@@ -23,6 +13,12 @@ During Fall 2016, Dr. Christopher Fennell was approached by Dr. Charles Weinert 
 Seen as an opportunity to train a new graduate student in conformational calculations, this project was delegated to me.
 The initial focus was to create the two compounds in a 3D modeling program, save a file of each, run a conformation optimization program on a supercomputer, and read the output to report the findings.
 As detailed below, this work led to impossibilities, curiosities, and inconsistencies that resulted in a general solution and a discovery of a flaw in a popular computational program.
+
+\subsection{Computational Complexity of Germanium Compounds}
+
+Publications on germanium computational efforts are not as common as many other main group elements. 
+Of those extant publications, the majority of final published data involve a Density Functional Theory (DFT) with either the 6-31G(d), 6-31G(d,p), or 6-311G(2d) basis set.\cite{GeCompStudy1}
+As with most other lighter elements calculated with Pople basis sets, the 6-31G(d,p) basis set is most commonly used for the final energy calculation.\cite{Weinert1,Weinert2}
 
 \subsection{Parameters of Work and Previous Collaborator's Results}
 
@@ -35,7 +31,7 @@ An example image of both compounds in their fully-\textit{trans} configurations 
 	
 	\centering
 	
-	\includegraphics[width=0.75\textwidth]{5geTTT.png}
+	\includegraphics[width=0.75\textwidth]{5geTTstick.png}
 	
 	\caption{Fully \textit{trans} configuration of pentagermanium-based compound.}
 	
@@ -47,7 +43,7 @@ An example image of both compounds in their fully-\textit{trans} configurations 
 	
 	\centering
 	
-	\includegraphics[width=0.75\textwidth]{6geTTT.png}
+	\includegraphics[width=0.75\textwidth]{6geTTTstick.png}
 	
 	\caption{Fully \textit{trans} configuration of hexagermanium-based compound.}
 	
@@ -236,7 +232,20 @@ As an explanation for the insurmountability of the problem, consider the hexager
 The germanium dihedrals represent three rotatable bonds each with three initial positions. 
 To include the phenyl rings would require the inclusion of eight new rotatable bonds each with three initial positions.
 Additionally, considering each terminal germanium's rotation while ignoring each isopropyl's rotatable bonds adds two initial positions each with three initial positions. 
-Together, this creates a structure with 13 rotatable bonds each with three initial positions. The number of conformers follows as $3^{13} = 1,594,323$ initial conformers. 
+Together, this creates a structure with 13 rotatable bonds each with three initial positions.
+A visual of these bonds are given in figure \ref{fig:6geTorsHilite}.
+\begin{figure}
+	
+	\centering
+	
+	\includegraphics[width=0.75\textwidth]{6geTorsHilite.png}
+	
+	\caption{Visualization of rotatable bonds in hexagermane molecule colored by bonded atoms. Green: Ge-Ge, red: Ge-phenyl C, blue: Ge-isopropyl C.}
+	
+	\label{fig:6geTorsHilite}
+	
+\end{figure}
+The number of conformers follows as $3^{13} = 1,594,323$ initial conformers. 
 Now we must consider the computational aspect of this many conformers.
 At 10 conformers rotated and generated per second and 16 KB per conformer, the initial conformers would require 44.3 hours and generate 25.49 GB of data just in the initial structures.
 At an average of 72 minutes per computation and 73.7 MB produced at B3LYP hybrid functional and STO-3G basis set and access to all 255 regular nodes of Oklahoma State University's Cowboy cluster running in parallel, the complete computation would generate 117.5 TB of data and require 312 days of continuous computation to determine a possible lowest energy conformer of this one molecule at a relatively low level basis set and theory.
@@ -269,7 +278,7 @@ A generic effort at producing a method in this style is detailed in chapter \ref
 	
 	\centering
 	
-	\includegraphics[width=0.75\textwidth]{6geTCT.png}
+	\includegraphics[width=0.75\textwidth]{6geTCTstick.png}
 	
 	\caption{Visualization of a \textit{trans-cis-trans} hexagermane structure.}
 	
@@ -310,7 +319,7 @@ An example plot of this torsion drive is shown in figure \ref{fig:EXTorsion} Onc
 	
 	\centering
 	
-	\includegraphics[width=0.75\textwidth]{Ge4HFSTO3G.png}
+	\includegraphics[width=0.75\textwidth]{Ge4HFSTO3Gkj.png}
 	
 	\caption{Sample torsion plot at reduced energy scale.}
 	

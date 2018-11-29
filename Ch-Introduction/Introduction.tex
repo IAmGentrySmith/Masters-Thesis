@@ -4,25 +4,24 @@
 \section{Computational Chemistry: Chemistry on the Computer}
 
 For nearly a century, computational methods have greatly assisted chemists in their efforts of research and discovery.
-% EXAMPLES? CITATION NEEEDED
-As a standalone field, computational chemistry uses computer simulations to solve chemical problems. 
+Five computational chemists have been awarded the Nobel Prize in Chemistry. 
+Laureates include Walter Kohn and John Pople in 1998 and Martin Karplus, Michael Levitt, and Arieh Warshel in 2013.
+Since the early 1960s, chemists have specialized in using computer systems to solve chemical problems.
+
+Computational chemistry is now recognized as its own field rather than a sub-specialty within physical chemistry as computational chemists continue to develop efficient methods to calculate large and complex simulations.
 These simulations typically rely on theoretical methods adapted to run highly efficiently on computers.
-While initial computational methods were designed to solve wave functions and atomic orbitals, the scope quickly expanded into multiple fields of chemistry as more methods were developed to confirm or predict properties of molecules and systems.
+While initial computational methods were designed to solve wave functions and atomic orbitals, the scope quickly expanded into multiple fields of chemistry as more methods were developed to confirm or predict properties of molecules and systems.\cite{PopleSTO, GaussianOrbitals,GAMESS}
 %With the introduction of \textit{ab initio} and density functional methods, computational methods began to stand as a distinct field within chemistry. 
 This introduction serves to introduce necessary background information generally relevant to the methods developed and utilized in the following chapters.
 
 \section{Relevant Computational Methods}
 
-%REBUILD
-%Analytical descriptions of molecular systems are ideal because 
-%...
-%however
-%...
-%so we use numerical approaches
-%...
-
-Modern computational methods take one of several approaches in computing a system.
-Usually limited by the scale of molecule and scope of system, multiple methods exist to analytically solve or closely approximate a system by way of solving or approximating the quantum mechanical wave function or through a similarly consistent method of generalization by way of statistical solutions.
+Analytical descriptions of molecular systems are ideal for simulations due to the comparableness to experimental data.
+However, analytical methods are often impossible or overly complex for computer systems to provide analytic solutions.
+This complexity usually drives numerical approaches to instead approximate values instead of analytic solutions.
+While not exact, these numerical approximations can produce values consistent with experimental data.
+Usually limited by the size of a system, multiple numerical methods exist to analytically solve or closely approximate a system by way of solving or approximating the quantum mechanical wave function.
+Methods relevant to this work include \textit{ab initio}, density functional, semi-empirical, and Monte Carlo methods.
 Many other methods exist, but are not directly relevant to this work.
 
 The first hurdle in any computational system is the likely impossibility of analytically solving the problem. 
@@ -52,7 +51,14 @@ The calculation of relativistic and spin terms require a further method known as
 Density Function Theory (DFT) Methods function very similarly to \textit{ab initio} methods in how Slater-type orbitals are used to approximate the Schr\"{o}dinger equation, but differ in that DFT utilizes some empirical data to speed up the calculation process.\cite{DFT}
 These simplifications are able to model exchange and correlation interactions very well, however the reliability of calculated properties, specifically intermolecular interactions, dispersion forces, and other internal properties are greatly reduced.
 Just as with \textit{ab initio} methods, DFT methods require a basis set definition for the approximation calculations.
-Many DFT methods exist and even some so-called hybrid functional methods that exchange with HF terms for greater reliability in calculated values.
+DFT methods exist as pure DFT methods or as hybrid functional methods.
+Pure DFT methods excel in computing systems much more efficiently than with HF methods, but at the cost of accuracy.
+These pure functionals do not rely as much on HF terms and instead use a more general expression.
+Hybrid functional methods act as DFT methods but with the inclusion of HF terms that require additional computation.
+Both DFT and hybrid functional methods use an exchange and correlation part.\cite{KohnExchangeCorrelation}
+The exchange part attempts to fix density problems from DFT approximations while the correlation parts fixes electron correlation problems including two electrons of identical spin occupying the same position.
+
+
 One pure DFT method used in this work is BLYP, which utilizes  the Becke exchange with the Lee-Yang-Parr correlation part.
 Some hybrid functional methods used are the B3LYP, M06L, and PBE methods.
 The B3LYP utilizes the BLYP but combined Becke's exchange with the exact energy from HF theory.
@@ -81,7 +87,7 @@ STOs notably exhibit similar features as Schr\"{o}dinger-based orbitals, excepti
 Gaussian-type orbitals (GTOs), introduced by S. Francis Boys in 1950,\cite{GaussianOrbitals} also function as orbitals in the LCAO method.
 GTOs are similar to STOs in premise, but have further reduced realism when compared to Schr\"{o}dinger-based orbitals.
 One example of this is the lack of accuracy of electron density near the nucleus.
-While exhibiting a lesser accuracy, GTOs excel in computational efficiency compared to STOs by roughly 4-5 orders of magnitude.
+While exhibiting a lesser accuracy, GTOs excel in computational efficiency compared to STOs.
 This allows GTO-based calculations to compute more orbitals.
 Specifically, Boys designed GTOs as a method of approximating STOs.
 
@@ -116,7 +122,9 @@ This method of randomness was improved upon by Stanislaw Ulam while working at L
 Ulam shared this work with John von Neumann and together they created a program to run on the Electronic Numerical Integrator and Computer (ENIAC) capable of computing this favored version of random sampling.
 As the project was secretive due to being used as a part of the Manhattan Project, a collaborator named Nikolas Metropolis suggested the name Monte Carlo due to Ulam's uncle's propensity to gambling at a casino in Monaco of the same name.\cite{MCOrigins}
 Later dubbed Markov Chain Monte Carlo (MCMC) sampling, this allowed for random sampling to instead become a virtual statistically-appropriate sampling method.
-Eventually published in 1949 by Metropolis and Ulam, this laid the groundwork for MC methods used in modern chemical simulation packages. 
+At the most common level, MC methods apply probabilistic forces to a random interaction to generate a numeric approximation.
+Eventually published in 1949 by Metropolis and Ulam, this introduced MC methods to chemical simulation packages. 
+
 
 
 \section{Hardware}
@@ -165,10 +173,9 @@ As a scripted type language, Python is not compiled for specific hardware like c
 Math and science packages like NumPy\cite{NumPy} and SciPy\cite{SciPy} interface with C code to rapidly speed up complex mathematic evaluations like matrix manipulations while retaining the usability expected in Python.
 Additional packages like Cython\cite{Cython} will take a completed Python script and compile much of it in C code to greatly improve efficiency and reduce the computational strain on the system.
 
-As will be seen in this work, code can be used to generate and run these sets of code, effectively creating a train of code that can operate as a tool within a tool. 
-One aspect of this is abstracting out methods and basis sets to that of a computational requirement and level of accuracy.
-% THIS IS WEIRD. FIX ,,,
-%Effectively, an investigator could remove any necessary knowledge of which basis set or method is necessary for a specific system, although a tool with sufficient awareness to automatically enact this has not been published.
+As will be seen in this work, code can be used to generate and run these sets of code, effectively creating an automated function that can operate as a tool within a tool. 
+One aspect of this is abstracting out methods and basis sets to that of a computational requirement and level of accuracy, which will be discussed in chapter \ref{ch:ConformationLandscape}.
+
 
 
 
