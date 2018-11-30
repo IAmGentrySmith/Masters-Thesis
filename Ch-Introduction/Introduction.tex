@@ -10,22 +10,23 @@ Since the early 1960s, chemists have specialized in using computer systems to so
 
 Computational chemistry is now recognized as its own field rather than a sub-specialty within physical chemistry as computational chemists continue to develop efficient methods to calculate large and complex simulations.
 These simulations typically rely on theoretical methods adapted to run highly efficiently on computers.
-While initial computational methods were designed to solve wave functions and atomic orbitals, the scope quickly expanded into multiple fields of chemistry as more methods were developed to confirm or predict properties of molecules and systems.\cite{PopleSTO, GaussianOrbitals,GAMESS}
+While initial computational methods were designed to solve wave functions and atomic orbitals, the scope quickly expanded into multiple fields of chemistry as more methods were developed to confirm or predict properties of molecules and systems.\citep{PopleSTO, GaussianOrbitals,GAMESS}
 %With the introduction of \textit{ab initio} and density functional methods, computational methods began to stand as a distinct field within chemistry. 
 This introduction serves to introduce necessary background information generally relevant to the methods developed and utilized in the following chapters.
 
 \section{Relevant Computational Methods}
 
-Analytical descriptions of molecular systems are ideal for simulations due to the comparableness to experimental data.
-However, analytical methods are often impossible or overly complex for computer systems to provide analytic solutions.
-This complexity usually drives numerical approaches to instead approximate values instead of analytic solutions.
+Analytical descriptions of molecular systems are ideal simulation goals as they provide a complete description of a process.
+However, it is often impossible to provide analytic solutions for complex systems.
+This complexity usually drives numerical approaches to instead approximate chemical systems of interest.
 While not exact, these numerical approximations can produce values consistent with experimental data.
 Usually limited by the size of a system, multiple numerical methods exist to analytically solve or closely approximate a system by way of solving or approximating the quantum mechanical wave function.
 Methods relevant to this work include \textit{ab initio}, density functional, semi-empirical, and Monte Carlo methods.
-Many other methods exist, but are not directly relevant to this work.
+Many other methods exist but are not directly relevant to this work.
 
 The first hurdle in any computational system is the likely impossibility of analytically solving the problem. 
-In a system with more than two particles, this multi-body problem usually cannot be solved analytically excepting the dihydrogen cation due to the electron-electron correlation term being situationally dependent.
+In a system with more than two particles, this multi-body problem usually cannot be solved analytically, excepting cases like the dihydrogen cation, due to the electron-electron correlation term being situationally dependent.\cite{ManyBody}
+Here, we will focus on systems of such complexity that numerical approaches will be of greatest interest.
 %This is largely due to the complexity introduced into the wave function of multiple interacting species that often lead to prohibitively large or impossible equations to solve.
 
 \subsection{Quantum Mechanical Methods and Basis Sets}
@@ -55,11 +56,11 @@ DFT methods exist as pure DFT methods or as hybrid functional methods.
 Pure DFT methods excel in computing systems much more efficiently than with HF methods, but at the cost of accuracy.
 These pure functionals do not rely as much on HF terms and instead use a more general expression.
 Hybrid functional methods act as DFT methods but with the inclusion of HF terms that require additional computation.
-Both DFT and hybrid functional methods use an exchange and correlation part.\cite{KohnExchangeCorrelation}
+Both DFT and hybrid functional methods use an exchange and correlation part.\cite{DFT}
 The exchange part attempts to fix density problems from DFT approximations while the correlation parts fixes electron correlation problems including two electrons of identical spin occupying the same position.
 
 
-One pure DFT method used in this work is BLYP, which utilizes  the Becke exchange with the Lee-Yang-Parr correlation part.
+One pure DFT method used in this work is BLYP, which utilizes  the Becke exchange with the Lee-Yang-Parr correlation part.\cite{BLYP}
 Some hybrid functional methods used are the B3LYP, M06L, and PBE methods.
 The B3LYP utilizes the BLYP but combined Becke's exchange with the exact energy from HF theory.
 M06L, known as the Minnesota functionals, depend on kinetic energy density values from databases.
@@ -104,14 +105,13 @@ The most common form of these basis sets was introduced by John Pople as the X-Y
 These follow the form that each orbital basis function is comprised of X Gaussians.
 The Y and Z represent an additional linear combination of Gaussian functions made of Y and Z Gaussians  that compose the valence. 
 These basis sets are not limited to two valence functions, referred to as a double-zeta, and can also be triple- or quadruple-zeta.
-Additional values, typically denoted by one or two stars, one or two plus signs, or explitly-defined orbital combinations in parentheses can also be used to further expand the basis set as desired.
+Additional values, typically denoted by one or two stars, one or two plus signs, or explicitly-defined orbital combinations in parentheses can also be used to further expand the basis set as desired.
 The star notation defines a polarization function for heavy atoms to account for d and f polarizations.
 The plus signs denote diffuse functions that more-accurately represent less common valence electrons like carbanions that may diffuse further out from the nucleus.
 
 \subsection{Monte Carlo Molecular Modeling}
 
-As systems increase, approximations quickly approach infeasibly-high calculation times.
-A method of working around this problem is known as Monte Carlo methods, or MC.
+Another method of simulating chemical systems is known as Monte Carlo methods, or MC.
 While not named until the 1950s, MC methods were first seen in the 18$^{th}$ century thought experiment Buffon's needle.\cite{buffon}
 In his work, Buffon proposed dropping $n$ needles of length $l$ onto a plane with parallel lines spaced $t$ units apart.
 Buffon worked out that the probability, $P$, of a needle crossing one of the lines to be $P=\frac{2l}{t\pi}$.
@@ -123,7 +123,7 @@ Ulam shared this work with John von Neumann and together they created a program 
 As the project was secretive due to being used as a part of the Manhattan Project, a collaborator named Nikolas Metropolis suggested the name Monte Carlo due to Ulam's uncle's propensity to gambling at a casino in Monaco of the same name.\cite{MCOrigins}
 Later dubbed Markov Chain Monte Carlo (MCMC) sampling, this allowed for random sampling to instead become a virtual statistically-appropriate sampling method.
 At the most common level, MC methods apply probabilistic forces to a random interaction to generate a numeric approximation.
-Eventually published in 1949 by Metropolis and Ulam, this introduced MC methods to chemical simulation packages. 
+Eventually published in 1949 by Metropolis and Ulam, this introduced MC methods to chemical simulation packages.\cite{MCMetropolis}
 
 
 

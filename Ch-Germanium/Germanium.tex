@@ -54,7 +54,7 @@ An example image of both compounds in their fully-\textit{trans} configurations 
 	
 	\centering
 	\begin{tabular}{llll}
-		Conformation & Energy ($E_{h}$)    & $\Delta$ Energy ($E_{h}$) & $\Delta$ Energy ($\frac{kJ}{mol}$) \\ \cline{1-4} 
+		Conformation & Energy ($E_{h}$)    & $\Delta$ Energy ($E_{h}$) & $\Delta$ Energy ($\mathrm{\frac{kJ}{mol}}$) \\ \cline{1-4} 
 		Trans-coplanar        & -15014.8403143 & 0.0066255            & 17.39525025                        \\
 		Cis-Trans-Cis         & -15014.7983311 & 0.0486087            & 127.6221418                        \\
 		Trans-Cis-Trans       & -15014.8469398 & 0.0000000            & 0.0000000                                  \\
@@ -128,7 +128,7 @@ The phenyl rings usually were settled in a form of $\pi$ stacking or some kind o
 
 To further avoid backbone rotation restrictions, variations of the bulky molecules were also produced. 
 These included versions where the phenyl rings were replaced by methyl groups and also where the isopropyl ends were additionally replaced by methyl groups. 
-Their intention in these designs were to observe the shift in relative energy between the sets of conformers to determine how significant of a role the phenyl rings and isopropyl groups played.
+The intention in these designs were to observe the shift in relative energy between the sets of conformers to determine how significant of a role the phenyl rings and isopropyl groups played.
 These variations, along with the original form structures, were subject to the same calculations as in the first design: Gaussian 09, B3LYP hybrid functional, STO-3G basis set, no angle restrictions, single particle in a vacuum, otherwise default parameters.
 The results of these calculations are tabulated in tables \ref{tab:Ge5Ver2Data} and \ref{tab:Ge6Ver2Data}.
 
@@ -394,7 +394,7 @@ Curious to see if the germanium atom's basis set data or if the entire basis set
 A quick run confirmed the problem to also exist on Gaussian 03 as well as Gaussian 09.
 The final effort was to check whether this error was isolated to Gaussian 09 or to all QM programs. 
 A simplified test to calculate the energy of the expected global minimum (180$^{\circ}$) and maximum (0$^{\circ}$) of a Hartree Fock theory with the suspect 6-31G(d) basis set was prepared and executed, with the results tabulated in \ref{tab:geHFAppData}.
-As can be seen, critical energetic difference was negative for Gaussian 09 and positive for both GAMESS and NWChem.
+As can be seen, critical energetic difference was negative for Gaussian 09 and positive for both GAMESS\cite{GAMESS} and NWChem.\cite{NWChem}
 Since the expected conformations should yield a positive difference, it was concluded that both Gaussian 03 and 09 contain bad 6-31G(d) basis set data for germanium.
 
 \begin{figure}

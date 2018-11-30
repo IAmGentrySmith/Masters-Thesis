@@ -146,11 +146,6 @@ def getConformationInfo(depth, torsions):
 
 
 
-
-
-
-
-
 def Launcher():
     valid = IOValidator()
     if valid:
@@ -169,13 +164,10 @@ def Launcher():
 def InitWD():
 
 
-
-
 # Recursive search through molecule torsions
 def RecursiveSearch(depth):
 
     torsions = getTorsions()
-
 
 
 Launcher()
