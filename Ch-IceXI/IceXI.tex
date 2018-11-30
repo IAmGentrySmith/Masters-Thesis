@@ -11,6 +11,10 @@ First described in John Desmond Bernal and Ralph H. Fowler's 1933 paper, the Ber
 Although a bent, divalent molecule, water possesses an electronic tetrahedral structure that allows for four interactions on each molecule.
 The two protons each allow for a hydrogen bond with a lone pair from a neighboring oxygen atom.
 Similarly, the oxygen atom's two lone pairs each allow for a hydrogen bond with a neighboring proton. 
+While a hydrogen bond is typically defined as an attractive interaction between a proton and one lone pair of electrons on Nitrogen, Oxygen, or Fluorine, this work restricts the definition to a computational implication.
+Here, a hydrogen bond refers to the space between two oxygen atoms in a crystal where exactly one proton and lone pair are directed toward one another according to Bernal-Fowler ice rules. 
+Conversely, hydrogen bonding does not occur if Bjerrum L or D defects occur between the oxygens.
+Fortunately, this difference is sufficiently small for visualization programs like Avogadro to still recognize hydrogen bonds between a rotated hydrogen atom and corresponding neighboring lone pair. 
 These rules are fairly rigid in the sense that every water molecule can interact with two oxygen atoms and two protons from four surrounding water molecules.
 These are also relatively relaxed in the sense that, once hydrogen bonded, each of the four attached water molecules can occupy one of three rotational positions. 
 Including the 6 orientations of the central water, 486 microstates exist from these five waters.
@@ -64,13 +68,16 @@ The ease of generation of an ice XI structure stems from the repetition of a uni
 With ice I$_{h}$ crystals, the proton-disordered form introduces entropy by way of rotational disorder of water molecules. 
 The disordered protons allow for a greater number of microstates in the organization of the crystal, increasing the multiplicity and, by its very definition, entropy.
 As the protons and lone pairs are no longer consistently ordered, hydrogen bonds may no longer form properly at all interaction sites. 
+Fortunately, this difference is sufficiently small for visualization programs like Avogadro to still recognize hydrogen bonds between a rotated hydrogen atom and corresponding neighboring lone pair. 
 The interaction of proton with proton or lone pair with lone pair are not hydrogen bonds and are considered defects in the lattice. 
 These are known as Bjerrum defects and referred as D with two protons or L with two lone pairs interacting.\cite{BjerrumDefects}
+While a hydrogen bond is typically defined as an attractive interaction between a proton and one lone pair of electrons on Nitrogen, Oxygen, or Fluorine, this work restricts the definition to a computational implication.
+Here, a hydrogen bond refers to the space between two oxygen atoms in a crystal where exactly one proton and lone pair are directed toward one another according to Bernal-Fowler ice rules. 
+Conversely, hydrogen bonding does not occur if Bjerrum L or D defects occur between the oxygens.
 An ice structure of randomly oriented molecules without consideration of hydrogen bonds will likely produce defects at many interaction sites across the lattice and weaken the integrity of the crystal, leading to stability problems while running simulations. 
 In generating the crystal, the cause of these defects must be considered and countered effectively.
 While other stable hydrogen bonding structures may exist, they would either break the Bernal-Fowler ice rules or alter the structure away from the specified form.
 
-%sub-ish section: necessary attributes to change to convert XI to Ih
 
 
 \section{Method Design}
@@ -87,25 +94,25 @@ While other stable hydrogen bonding structures may exist, they would either brea
 % 8. Fix as necessary (in progress) DONE
 % 9. Compare to existing work
 
-\subsection{Overview}
+\subsection{Method Tools and Information Management}
 
 The primary objective is to convert an easy-to-make ice XI crystal into an ice I$_{h}$ crystal.
 Because the key difference in structure is the proton-orderedness, it might be possible to rearrange the water molecule orientations in a pseudorandom way to create an ice I$_{h}$ crystal.
 This section walks through the method developed to convert ice XI into ice I$_{h}$, the results of initial testing, and imperfections discovered in the design.
 
-\subsection{Selection of Software Tools}
+%\subsection{Selection of Software Tools}
 
 Python was chosen as the programming language of the tool due to its versatility and the ease of development due to the ``pseudocode" written style and the availability of scientific packages including SciPy and NumPy. 
 Python version 2.7 was specifically utilized.
 Crystal files where defined and saved as Protein Data Bank (.pdb) files as this format allows for defining multiple molecules within a larger structure with a simple X, Y, Z grid position format. 
 An example of this is provided in Appendix \ref{ch:App:CrystalDisorg}.
 
-\subsection{Generation of Source Ice XI}
+%\subsection{Generation of Source Ice XI}
 
 To create an ice XI .pdb file, an ice XI cell of eight water molecules can be tiled to create a sufficiently large crystal.
 The primarily used crystal consists of a 3 x 3 x 6 cell repetition totaling 432 water molecules.
 
-\subsection{Source Ingestion}
+%\subsection{Source Ingestion}
 
 It is important that the crystal be read and stored in an efficient method to keep relevant information about each molecule easily accessible. 
 As the file is read in, each molecule is stored as an entry in a multidimensional array where the first index is the molecule number. 
@@ -113,7 +120,7 @@ Further, the second index defines the molecule number where 0 is oxygen and 1 an
 The third, fourth, and fifth indices define the X, Y, and Z position coordinates. 
 This is functionally identitical to the .pdb format data, but compresses the data across multidimensional arrays for iterative use.
 
-\subsection{Identifying Neighboring Molecules}
+%\subsection{Identifying Neighboring Molecules}
 
 Identifying the neighboring molecules proved computationally difficult. 
 The most effective method is to find the closest four molecules by computing a distance between every two oxygen atoms.
@@ -134,7 +141,7 @@ Once these four neighboring oxygen atoms have been discovered for each water, th
 
 
 % NEEDS SIGNIFICANT WORK
-\subsection{Determining Tetrahedral Positions}
+%\subsection{Determining Tetrahedral Positions}
 
 An important aspect of pseudorandom selection is the existence of a bank of options.
 Utilizing the ingestion portion of the tool to calculate and store all orientational possibilities proves effective for tracking position options.
@@ -159,15 +166,13 @@ A visualization of these four tetrahedral positions, two read and two generated,
 \end{figure}
 
 % something about normal 109.5º tetrahedral angle
-This does not produce an exactly correct tetrahedral position of potential hydrogen atoms due 104.5$^{\circ}$ of the H-O-H bond created by the variance in repulsive forces between the two lone pairs of electrons and two hydrogen atoms. 
-While a hydrogen bond is typically defined as an attractive interaction between a proton and one lone pair of electrons on Nitrogen, Oxygen, or Fluorine, this work restricts the definition to a computational implication.
-Here, a hydrogen bond refers to the space between two oxygen atoms in a crystal where exactly one proton and lone pair are directed toward one another according to Bernal-Fowler ice rules. 
-Conversely, hydrogen bonding does not occur if Bjerrum L or D defects occur between the oxygens.
+In a equally-repulsed tetrahedral molecule, electron group angles are 109.5$^{\circ}$.
+This method does not produce an exactly correct tetrahedral position of potential hydrogen atoms due to the slightly acute104.5$^{\circ}$ H-O-H bond created by the variance in repulsive forces between the two lone pairs of electrons and two hydrogen atoms.
 Fortunately, this difference is sufficiently small for visualization programs like Avogadro to still recognize hydrogen bonds between a rotated hydrogen atom and corresponding neighboring lone pair. 
 Currently, the method does not correct for these minor angle variations and relies on the user to anneal the crystal by way of simulation to fully adjust the angles. 
 Future versions of this method may account for the variations.
 
-\subsection{Pseudorandom Rearrangement of Water Molecules}
+\subsection{Pseudorandom Rearrangement of Water Molecules and Generation of Bjerrum Defects}
 
 Once the tetrahedral positions have been defined, each water molecule is ready to rotate.
 What may seem the most crucial step in this methods ends up being the most simple.
@@ -180,7 +185,7 @@ The likelihood of a defect-free interaction lattice forming is nearly zero and i
 For example, the first molecule reoriented will have a $\frac{5}{6}$ chance of containing a defect.
 
 
-\subsection{Detecting Hydrogen Bond Defects}
+%\subsection{Detecting Hydrogen Bond Defects}
 
 After all water molecules have been rearranged, defects between incorrectly-interacting hydrogen bonds must be found and corrected.
 Discovering the defects relies on the detection of neighboring molecules and the appropriate interacting hydrogen atom or electron lone pair. 
@@ -191,7 +196,7 @@ Likewise, these defects can be summed and halved to produce a total number of de
 Each molecule holding its own defect count allows for contextual changes during the correction step.
 
 
-\subsection{Correcting Hydrogen Bond Defects}
+%\subsection{Correcting Hydrogen Bond Defects}
 
 Once the hydrogen bond defects have been discovered and marked, each needs to be corrected.
 The most direct approach to this is to sequentially walk through each defect and repeat the pseudorandom rotation until the number of defective regions is zero or a user-specified value.
