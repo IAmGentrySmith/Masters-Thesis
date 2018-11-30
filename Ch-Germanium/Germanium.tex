@@ -298,28 +298,18 @@ The approach to acquiring sufficient data for a possible correction factor invol
 This reduced the complication and complexity of bulkiness and allowed for quick full torsion rotations about the single Ge-Ge-Ge-Ge dihedral.
 By operating at intervals of 5$^{\circ}$, a full torsion drive provides a glimpse at relative energies of the molecule at 72 discrete states. 
 
-% THIS IS BAD AND YOU SHOULD FEEL BAD. REMAKE GRAPHS WITH ABSOLUTE ENERGIES
-The extended round of torsion drive calculations included an alteration in representation of the data.
-As the focus had shifted from relative energies and intensities across multiple theories and basis sets to a focus on graph smoothness and internal relative energies, the energy axis of plots were reduced to a unitless scale ranging 0 to 1, where 0 represents the minimum energy and 1 represents the maximum energy in a given set of torsion drive data.
-This allowed for graphical representations of each torsion drive to emphasize the internal variation of torsions relative to the minimum and maximum values.
-This was accomplished by taking any set of data with absolute scale energy unit, identifying the minimum and maximum values, and scaling each data point according to equation \ref{eq:TorsionReducedScale}. 
-The script to collect and scale data points is detailed in Appendix \ref{ch:App:Germane}.
-
-\begin{equation}
-% NEEDS SOME WORK
-E_{i, red} = \frac{E_{i,abs} - E_{min,abs}}{E_{max,abs}-E_{min,abs}}
-\label{eq:TorsionReducedScale}
-% NEEDS SOME WORK
-\end{equation}
-
 An example plot of this torsion drive is shown in figure \ref{fig:EXTorsion} Once multiple torsion drives had completed in multiple group four elements (butane, butasilane, and butagermane were all built and tested), the energies could be compared and analyzed for any relative or absolute scaling at the additive or multiplicative reference. 
-%MORE
+Relative scaling involved two approaches.
+The first relative scaling approach involved subtracting each data point by the minimum energy.
+The second approach involved reducing the first approach to a scale from 0 to 1. 
+This allowed the data points to be considered as percentage energies for additive scaling.
+The script to collect and scale data points is detailed in Appendix \ref{ch:App:Germane}.
 
 \begin{figure}
 	
 	\centering
 	
-	\includegraphics[width=0.75\textwidth]{Ge4HFSTO3Gkj.png}
+	\includegraphics[width=0.75\textwidth]{Ge4HFSTO3G.png}
 	
 	\caption{Sample torsion plot at reduced energy scale.}
 	
@@ -327,8 +317,9 @@ An example plot of this torsion drive is shown in figure \ref{fig:EXTorsion} Onc
 	
 \end{figure}
 
-For a full comparative set, 3456 points of analyzed data were generated for each reference molecule's potential in comparison with the others. 
-Unsurprisingly, no simple correction factor arose by method of a simple additive or multiplicative term applied toward all torsion points. 
+For a full comparative set, 3456 points of analyzed data were generated for each reference molecule's potential in comparison with the others.
+The script to accomplish each molcule-centric analysis is detailed in Appendix \ref{ch:App:Germane}. 
+No simple correction factor arose by method of a simple additive or multiplicative term applied toward all torsion points with either absolute or relative energy values. 
 To expand on the comparative set, a set of butyl- group IV conformers were generated with every possible permutation of C, Si, and Ge, each then rotated about the torsion in 5$^{\circ}$ increments to produce a total of 5832 conformers.
 These were then subject to the same data comparison method as before, again to no noticeable trend.
 A future avenue of research could be to further explore this with depressive or polynomial terms to discover whether a simple corrective function might exist with specific molecules.
@@ -386,11 +377,11 @@ A repeat of the trial yielded the same data.
 A repeat of the system with a freshly created butagermane yielded the same data.
 A trial with data from a butagermane trial with the 6-31G(d,p) basis set yielded the same data.
 Each attempt at a 6-31G(d) basis set with the B3LYP theory yielded the same inverted data, while other basis sets within the theory produced expected data. 
-Next, the butagermane torsions were run with an identical basis set group with the Hartree-Fock theory, the results of which are shown in table \ref{fig:geTorsOne}.
+Next, the butagermane torsions were run with an identical basis set group with the Hartree-Fock theory, the results of which are shown in figure \ref{fig:geTorsHF}.
 
 Surprisingly, the 6-31G(d) result was also strangely inverted.
-This process was repeated for several more theories, with the 6-31G(d) basis set results plotted in figure \ref{fig:geTorsAll}.
-Curious to see if the germanium atom's basis set data or if the entire basis set method was the source, a similar run with butasilane was made and graphed in figure \ref{fig:siTorsOne}, to expected results.
+This process was repeated for several more theories, with the 6-31G(d) basis set results plotted in figure \ref{fig:geTorsTHd}.
+Curious to see if the germanium atom's basis set data or if the entire basis set method was the source, a similar run with butasilane was made and graphed in figure \ref{fig:siTorsHF}, to expected results.
 A quick run confirmed the problem to also exist on Gaussian 03 as well as Gaussian 09.
 The final effort was to check whether this error was isolated to Gaussian 09 or to all QM programs. 
 A simplified test to calculate the energy of the expected global minimum (180$^{\circ}$) and maximum (0$^{\circ}$) of a Hartree Fock theory with the suspect 6-31G(d) basis set was prepared and executed, with the results tabulated in \ref{tab:geHFAppData}.
@@ -401,11 +392,11 @@ Since the expected conformations should yield a positive difference, it was conc
 	
 	\centering
 	
-	\includegraphics[width=\textwidth]{geTorsOne.png}
+	\includegraphics[width=\textwidth]{geTorsHF.png}
 	
 	\caption{Hartree Fock energy minimization of butagermane torsion run at varying basis sets.}
 	
-	\label{fig:geTorsOne}
+	\label{fig:geTorsHF}
 	
 \end{figure}
 
@@ -413,11 +404,11 @@ Since the expected conformations should yield a positive difference, it was conc
 	
 	\centering
 	
-	\includegraphics[width=\textwidth]{geTorsAll.png}
+	\includegraphics[width=\textwidth]{geTorsTHd.png}
 	
 	\caption{Minimization of butagermane torsion run at varying theories and the 6-31G(d) basis set.}
 	
-	\label{fig:geTorsAll}
+	\label{fig:geTorsTHd}
 	
 \end{figure}
 
@@ -429,7 +420,7 @@ Since the expected conformations should yield a positive difference, it was conc
 	
 	\caption{B3LYP energy minimization of butasilane torsion run at 6-31G(d) basis set.}
 	
-	\label{fig:siTorsOne}
+	\label{fig:siTorsHF}
 	
 \end{figure}
 
