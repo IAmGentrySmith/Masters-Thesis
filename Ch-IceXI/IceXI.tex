@@ -13,7 +13,6 @@ The two protons each allow for a hydrogen bond with a lone pair from a neighbori
 Similarly, the oxygen atom's two lone pairs each allow for a hydrogen bond with a neighboring proton. 
 While a hydrogen bond is typically defined as an attractive interaction between a proton and one lone pair of electrons on Nitrogen, Oxygen, or Fluorine, this work restricts the definition to a computational implication.
 Here, a hydrogen bond refers to the space between two oxygen atoms in a crystal where exactly one proton and lone pair are directed toward one another according to Bernal-Fowler ice rules. 
-Conversely, hydrogen bonding does not occur if Bjerrum L or D defects occur between the oxygens.
 Fortunately, this difference is sufficiently small for visualization programs like Avogadro to still recognize hydrogen bonds between a rotated hydrogen atom and corresponding neighboring lone pair. 
 These rules are fairly rigid in the sense that every water molecule can interact with two oxygen atoms and two protons from four surrounding water molecules.
 These are also relatively relaxed in the sense that, once hydrogen bonded, each of the four attached water molecules can occupy one of three rotational positions. 
@@ -71,8 +70,6 @@ As the protons and lone pairs are no longer consistently ordered, hydrogen bonds
 Fortunately, this difference is sufficiently small for visualization programs like Avogadro to still recognize hydrogen bonds between a rotated hydrogen atom and corresponding neighboring lone pair. 
 The interaction of proton with proton or lone pair with lone pair are not hydrogen bonds and are considered defects in the lattice. 
 These are known as Bjerrum defects and referred as D with two protons or L with two lone pairs interacting.\cite{BjerrumDefects}
-While a hydrogen bond is typically defined as an attractive interaction between a proton and one lone pair of electrons on Nitrogen, Oxygen, or Fluorine, this work restricts the definition to a computational implication.
-Here, a hydrogen bond refers to the space between two oxygen atoms in a crystal where exactly one proton and lone pair are directed toward one another according to Bernal-Fowler ice rules. 
 Conversely, hydrogen bonding does not occur if Bjerrum L or D defects occur between the oxygens.
 An ice structure of randomly oriented molecules without consideration of hydrogen bonds will likely produce defects at many interaction sites across the lattice and weaken the integrity of the crystal, leading to stability problems while running simulations. 
 In generating the crystal, the cause of these defects must be considered and countered effectively.
@@ -279,7 +276,7 @@ A potential solution with partial development will score regions based on the nu
 
 For example, consider a specific water defined as level 1. 
 The neighboring four molecules are defined as level 2, and continued onward excepting already-defined molecules out to an $N^{th}$ level. 
-No special considerations for waters with fewer than four neighbors as periodic generation would allow ``edge" waters to interact with the periodic continuation waters.
+No special considerations for waters with fewer than four neighbors are necessary as periodic generation would allow ``edge" waters to interact with the periodic continuation waters.
 The number of defects in each level can be counted and averaged.
 Then a depressive factor along the lines of $\frac{1}{level}$ can be used to diminish the value of defects further away from the first-level molecule.
 This would create a value for each molecule that shows the relative density of defects centered about that specific molecule and could even be plotted as a gradient change within the crystal.

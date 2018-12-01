@@ -50,7 +50,7 @@
 %%
 %%              \begin{document}
 %%
-%%              \bibliographystyle{plain}  % Several styles available,
+%%              %\bibliographystyle{plain}  % Several styles available,
 %%                                         % check with your department
 %%
 %%              % FOREMATTER
@@ -435,9 +435,9 @@
     \ifnum #1=3 % Three committee members
        \parbox{\titlewidth}{\centering %
          \begin{tabular}{@{}c@{}}  % @{} suppresses leading and trailing spaces
-           \rule{\titlewidth}{0in} \\ \mbox{} \\ Advisor Name \\ \hline  % Sets width of sig. lines
-           Thesis Advisor \\ \mbox{} \\ Reader 1 Name \\ \hline
-           \mbox{} \\ \mbox{} \\ Reader 2 Name \\ \hline
+           \rule{\titlewidth}{0in} \\ \mbox{} \\ Dr. Christopher J. Fennell \\ \hline  % Sets width of sig. lines
+           Thesis Advisor \\ \mbox{} \\ Dr. Jindal K. Shah \\ \hline
+           \mbox{} \\ \mbox{} \\ Dr. Jimmie D. Weaver \\ \hline
          \end{tabular}}
          \vspace*{1in}
      \fi
