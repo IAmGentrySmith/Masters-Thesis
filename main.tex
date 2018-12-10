@@ -87,6 +87,8 @@
 
 
 %====================== chapters information ====================================
+
+\renewcommand{\thechapter}{\Roman{chapter}}
 \input{Ch-Introduction/Introduction}
 \input{Ch-IceXI/IceXI}
 %\input{Ch-2DWater/2DWater}
@@ -97,9 +99,9 @@
 %===================== bibliography ============================================
 %\nocite{*} %leave this to put ALL references in the bibliography
 \newpage
-\renewcommand\bibname{References}
+\renewcommand\bibname{\centerline{References}}
 \addcontentsline{toc}{chapter}{References}
-\bibliographystyle{nddiss2e}
+\bibliographystyle{achemso}
 \bibliography{References/References} %use main dissertation bibtex file
 
 
